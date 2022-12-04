@@ -1,0 +1,100 @@
+{
+    "rooms": [
+      {
+        "name": "Room 101",
+        "capacity": 5,
+        "isAvailable": true,
+        "location": "First Floor"
+      },
+      {
+        "name": "Room 102",
+        "capacity": 5,
+        "isAvailable": true,
+        "location": "First Floor"
+      },
+      {
+        "name": "Room 103",
+        "capacity": 5,
+        "isAvailable": true,
+        "location": "First Floor"
+      },
+      {
+        "name": "Room 104",
+        "capacity": 6,
+        "isAvailable": true,
+        "location": "First Floor"
+      },
+      {
+        "name": "Room 105",
+        "capacity": 7,
+        "isAvailable": true,
+        "location": "First Floor"
+      },
+      {
+        "name": "Room 201",
+        "capacity": 2,
+        "isAvailable": true,
+        "location": "Second Floor"
+      },
+      {
+        "name": "Room 202",
+        "capacity": 2,
+        "isAvailable": true,
+        "location": "Second Floor"
+      },
+      {
+        "name": "Room 203",
+        "capacity": 3,
+        "isAvailable": true,
+        "location": "Second Floor"
+      },
+      {
+        "name": "Room 204",
+        "capacity": 5,
+        "isAvailable": true,
+        "location": "Second Floor"
+      },
+      {
+        "name": "Room 205",
+        "capacity": 4,
+        "isAvailable": true,
+        "location": "Second Floor"
+      },
+      {
+        "name": "Room 301",
+        "capacity": 3,
+        "isAvailable": true,
+        "location": "Third Floor"
+      },
+      {
+        "name": "Room 302",
+        "capacity": 5,
+        "isAvailable": true,
+        "location": "Third Floor"
+      },
+      {
+        "name": "Room 303",
+        "capacity": 2,
+        "isAvailable": true,
+        "location": "Third Floor"
+      },
+      {
+        "name": "Room 304",
+        "capacity": 3,
+        "isAvailable": true,
+        "location": "Third Floor"
+      },
+      {
+        "name": "Room 305",
+        "capacity": 7,
+        "isAvailable": true,
+        "location": "Third Floor"
+      },
+      {
+        "name": "Room 306",
+        "capacity": 2,
+        "isAvailable": true,
+        "location": "Third Floor"
+      }
+    ]
+  }
