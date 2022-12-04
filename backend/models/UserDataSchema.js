@@ -94,12 +94,12 @@ const userDataSchema = new Schema({
 
 userDataSchema.pre("save", async function (next) {
   try {
-    if (
-      this.role === "S" &&
-      (this.studentDetails.college === undefined || this.studentDetails.major === undefined || this.studentDetails.degree === undefined)
-    ) {
-      throw new Error("STUDENT_DETAILS_REQUIRED_FOR_STUDENTS");
-    }
+    // if (
+    //   this.role === "S" &&
+    //   (this.studentDetails.college === undefined || this.studentDetails.major === undefined || this.studentDetails.degree === undefined)
+    // ) {
+    //   throw new Error("STUDENT_DETAILS_REQUIRED_FOR_STUDENTS");
+    // }
     const hashPass = await bcrypt.hash(this.password,10);
     this.password = hashPass;
     next();
