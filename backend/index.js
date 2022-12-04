@@ -17,7 +17,7 @@ app.listen(3001, () => {
 });
 
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/CRUD",
+  process.env.MONGODB_URI || "mongodb+srv://info-6150-final:info6150final@cluster0.jfxj8mz.mongodb.net/info-6150-final",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
