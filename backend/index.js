@@ -4,6 +4,7 @@ const app = express();
 const productRouter = require("./routes/ProductRoutes");
 const authenticationRoutes = require("./routes/AuthenticationRoutes");
 require('dotenv').config();
+const sgMail = require('@sendgrid/mail');
 
 const cors = require('cors');
 const corsOptions ={
@@ -30,6 +31,8 @@ mongoose.connect(
     if (err) {
       console.log(err);
     } else {
+      console.log(process.env.REACT_APP_SENDGRID_API_KEY);
+      sgMail.setApiKey(process.env.REACT_APP_SENDGRID_API_KEY);
       console.log("Connected to MongoDB");
     }
   }

@@ -4,8 +4,7 @@ const bcrypt = require("bcrypt");
 const UserDataSchema = require("../models/UserDataSchema");
 const jwt = require('jsonwebtoken');
 const redis = require('redis');
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey('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')
+const sgMail = require('@sendgrid/mail');
 
 const client = redis.createClient()
 client.connect();
@@ -124,7 +123,7 @@ exports.sendVerificationEmail = (email,name) => {
   const msg = {
     to: email, // Change to your recipient
     from: 'nksr.1996@gmail.com', // Change to your verified sender
-    templateId : "d-2ad4a1839d684bc58b362136d12047e2",
+    templateId : process.env.TEMPLATE_ID_1,
     dynamicTemplateData : {
       name, code
     }
@@ -146,7 +145,7 @@ exports.sendPasswordResetEmail = (email) => {
   const msg = {
     to: email, // Change to your recipient
     from: 'nksr.1996@gmail.com', // Change to your verified sender
-    templateId : "d-3012dd2ec0b24815ad406f724401cff5",
+    templateId : process.env.TEMPLATE_ID_2,
     dynamicTemplateData : {
        code
     }
@@ -160,17 +159,6 @@ exports.sendPasswordResetEmail = (email) => {
     console.error(err);
     return "FAILURE";    
   }
-  // sgMail
-  //   .send(msg)
-  //   .then(() => {
-  //     client.setEx(email+"v",300, "" + code);
-  //     return "SUCCESS";
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //     res.status(500).json({status: "FAILURE", message : "INTERNAL_SERVER_ERROR"});
-  //     return res.send();      
-  //   })
 }
 
 exports.verifyCode = async ({email,codeS},res) => {
