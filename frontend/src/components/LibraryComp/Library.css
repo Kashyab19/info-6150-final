@@ -2,6 +2,10 @@ body {
     font-family: ABeeZee, sans-serif !important;
   }
   
+
+  .library-main-container {
+    background-image: linear-gradient(rgba(228, 225, 199, 0.863), rgba(232, 228, 198, 0.78)), url("./Images/Library3.webp") ;
+  }
   .nav-brand {
     cursor: pointer !important;
     font-size: 1.5rem !important;
@@ -88,7 +92,7 @@ body {
   
   .big-img-container {
     padding: 10% 0 !important;
-    display: flex;
+    display: flex !important;
   }
   
   @media (min-width: 768px) {
@@ -139,31 +143,33 @@ body {
   .message-header {
     margin-top: 20px !important;
     font-size: 25px !important;
-    background-color: rgb(216, 229, 193);
+    background-color: rgb(216, 229, 193) !important;
    
   }
   
   .hours-text {
-    padding-left: 20px;
+    padding-left: 20px !important;
+    font-weight: 1000 !important;
   }
   
   .hours-table {
-    border: 1;
-    border-top: 1px solid #b4061f;
-    border-width: 90%;
+    border: 1 !important;
+    border-top: 1px solid #b4061f !important;
+    border-width: 90% !important;
   }
   
   .hours-table-body {
   
-  align-items: center;}
+  align-items: center !important;
+}
   
   th {
-    text-align: center;
-    width: 90%;
+    text-align: center !important;
+    width: 90% !important;
   }
   
   td {
-    width: 40%;
+    width: 40% !important;
   }
   
   .selected-room {
@@ -249,14 +255,15 @@ body {
   }
   
   .room-container {
-    margin: 0 1% !important;
+    margin: 1% 1.5% !important;
+    width:fit-content !important;
   }
   
   .room {
     background-color: rgba(245, 246, 250, 0.4) !important;
-    padding: 15px !important;
-    border-radius: 25px !important;
-    min-width: 80px !important;
+    padding: 10px !important;
+    border-radius: 20px !important;
+    min-width: 70px !important;
   }
   
   .room-row {

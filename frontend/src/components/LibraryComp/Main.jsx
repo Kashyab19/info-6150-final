@@ -3,7 +3,7 @@ import {Row, Col, Button} from "reactstrap";
 
 const Main = props => {
     return (
-    <div>
+    <div className="library-main-container">
       <Row noGutters className="text-center align-items-center room-cta">
         <Col>
           <p className="looking-for-room">

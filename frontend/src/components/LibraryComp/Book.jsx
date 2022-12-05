@@ -372,7 +372,7 @@ export default props => {
                       <span className="full-room"></span> &nbsp; Unavailable
                       &nbsp;&nbsp;
                     </div>
-                    <Row noGutters>{getRooms()}</Row>
+                    <Row noGutters xs="2" sm="6" md="4">{getRooms()}</Row>
                   </div>
                 ) : (
                   <p className="room-display-message">No Available Rooms</p>
