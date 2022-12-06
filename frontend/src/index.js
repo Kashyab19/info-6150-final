@@ -21,6 +21,7 @@ import Register from "./pages/Registration";
 import Login from "./pages/Login";
 import Verification from "./pages/Verification";
 import ProfilePage from "./pages/Profile";
+import RedEye from './pages/RedEye';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -35,7 +36,8 @@ root.render(
         <Route exact={true} path="/signup" element={<Register/>} />
         <Route exact={true} path="/verify" element={<Verification/>} />
         {/* <Route exact={true} path="/signup" element={<Register/>} /> */}
-      </Routes>
+          <Route exact={true} path="/RedEye" element={<RedEye/>} />
+</Routes>
     </AuthenticationContextProvider>
   </BrowserRouter>
 );
