@@ -12,6 +12,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 //Pages
 import AddProducts from './pages/AddProducts';
+import RedEye from './pages/RedEye';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,6 +21,7 @@ root.render(
     <Routes>
     <Route exact={true} path="/" element={<App />} />
     <Route exact={true} path="/add-products" element={<AddProducts/>} />
+    <Route exact={true} path="/RedEye" element={<RedEye/>} />
 </Routes>
 </BrowserRouter>
 );
