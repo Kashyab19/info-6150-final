@@ -1,0 +1,24 @@
+.form-check .form-comp {
+    margin-right: 100px !important
+}
+
+.form-check .buttons {
+    margin-left: 50px !important;
+    margin-right: 1 0px !important
+}
+
+.course-check-box  {
+    margin-right: 10px;
+}
+
+.form-comp {
+    display: flex;
+}
+
+details > summary {
+    list-style: none;
+  }
+
+details summary::-webkit-details-marker {
+    display:none;
+  }
