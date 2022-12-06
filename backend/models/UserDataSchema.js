@@ -87,8 +87,12 @@ const userDataSchema = new Schema({
     },
     major: {
       type: String,
-      enum: ["MIS", "CS", "MEM", "SES", "DA", "DS", "AN"],
+      enum: ["MIS", "CS", "MEM", "SES", "AI", "DS", "AN","RA"],
     },
+  },
+  file: {
+    data: Buffer,
+    contentType: String,
   },
 });
 
