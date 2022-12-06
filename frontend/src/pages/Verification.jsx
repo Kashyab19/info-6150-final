@@ -89,7 +89,7 @@ const VerificationComponent = () => {
           <></>
         ) : (
           <h5 className="fw-normal mb-3 pb-3 text-center">
-            Hi <strong>{auth.firstName}</strong>, Enter the code to cofirm your
+            Hi <strong>{auth.firstName} {"  "}</strong>, Enter the code to cofirm your
             email.
           </h5>
         )}

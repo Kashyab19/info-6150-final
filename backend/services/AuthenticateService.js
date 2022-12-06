@@ -5,6 +5,8 @@ const UserDataSchema = require("../models/UserDataSchema");
 const jwt = require('jsonwebtoken');
 const redis = require('redis');
 const sgMail = require('@sendgrid/mail');
+const mail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.REACT_APP_SENDGRID_API_KEY);
 
 const client = redis.createClient()
 client.connect();
@@ -13,6 +15,22 @@ const DEFAULT_EXPIRATION = 7200;
 exports.signUp = async (user) => {
   let UUID = nanoid();
   user.UUID = UUID;
+  let existingUser = await UserDataSchema.where("email")
+  .equals(user.email)
+  .findOne();
+  console.log(existingUser);
+  if(existingUser){
+    return Promise.reject("EMAILID_ALREADY_EXISTS");
+  }
+  if(!user?.studentDetails?.major){
+    delete user?.studentDetails?.major;
+  }
+  if(!user?.studentDetails?.degree){
+    delete user?.studentDetails?.degree;
+  }
+  if(!user?.studentDetails?.college){
+    delete user?.studentDetails?.college;
+  }
   let newUser = new UserModelSchema({ ...user });
   try {
     user = await (await newUser.save()).toObject();
@@ -38,7 +56,7 @@ exports.login = async (user) => {
         const accessToken = generateJWTToken(userExisting.email);
         const refreshToken = generateRefreshToken(userExisting.email);
         client.setEx(userExisting.email,DEFAULT_EXPIRATION, refreshToken);
-        return {accessToken, refreshToken, date: AddMinutesToDate(new Date(), 5)};
+        return {accessToken, refreshToken, date: AddMinutesToDate(new Date(), 5),"firstName" : userExisting.firstName};
       } else if(result){
         this.sendVerificationEmail(user.email,userExisting.firstName)
         return Promise.reject("PLEASE_VERIFY_EMAIL_TO_PROCEED");
@@ -123,7 +141,7 @@ exports.sendVerificationEmail = (email,name) => {
   const msg = {
     to: email, // Change to your recipient
     from: 'nksr.1996@gmail.com', // Change to your verified sender
-    templateId : process.env.TEMPLATE_ID_1,
+    templateId : process.env.REACT_APP_TEMPLATE_ID_1,
     dynamicTemplateData : {
       name, code
     }
@@ -140,18 +158,18 @@ exports.sendVerificationEmail = (email,name) => {
     })
 }
 
-exports.sendPasswordResetEmail = (email) => {
+exports.sendPasswordResetEmail = async (email) => {
   let code = Math.floor(100000 + Math.random() * 900000);;
   const msg = {
     to: email, // Change to your recipient
     from: 'nksr.1996@gmail.com', // Change to your verified sender
-    templateId : process.env.TEMPLATE_ID_2,
+    templateId : 'd-3012dd2ec0b24815ad406f724401cff5',
     dynamicTemplateData : {
        code
     }
   }
   try{
-    const mail  = sgMail.send(msg);
+    const mail  = await sgMail.send(msg);
     client.setEx(email+"v",300, "" + code);
     return "SUCCESS";    
   }
@@ -196,22 +214,32 @@ exports.verifyCode = async ({email,codeS},res) => {
 
 
 exports.forgotPassword =  async (email,res) => {
-  const passRes =  this.sendPasswordResetEmail(email);
-  console.log(passRes);
-  if(passRes === "SUCCESS"){
+  let code = Math.floor(100000 + Math.random() * 900000);;
+  const msg = {
+    to: email, // Change to your recipient
+    from: 'nksr.1996@gmail.com', // Change to your verified sender
+    templateId : process.env.REACT_APP_TEMPLATE_ID_1,
+    dynamicTemplateData : {
+       code
+    }
+  }
+  sgMail.send(msg).then((data) =>  {
+    client.setEx(email+"v",300, "" + code);
     res.status(200).json({status: "SUCCESS"});
     return res.send();
-  }else{
-    res.status(500).json({status: "FAILURE", message : "INTERNAL_SERVER_ERROR"});
+  }).catch((err) => {
+    console.error(err);
+    res.status(200).json({status: "FAILURE"});
     return res.send();
-  }
+  });
+  
 }
 
 exports.passwordReset =  async ({email, code, newPassword},res) => {
   try{
     const codeS = await client.get(email + "v");
     if(codeS === null || codeS === undefined){
-      this.sendPasswordResetEmail(email);
+      await this.sendPasswordResetEmail(email);
       res.status(200).json({status: "FAILURE" ,message : "VERIFICATION_CODE_EXPIRED_SENDING_NEW_ONE"});
       return res.send();
     }else if(code == codeS){
@@ -222,7 +250,7 @@ exports.passwordReset =  async ({email, code, newPassword},res) => {
       res.status(200).json({status: "SUCCESS", message : "PASSWORD_RESET_SUCCESSFUL_LOGIN_TO_CONTINUE"});
       return res.send();
     }else{
-      res.status(200).json({status: "FAILURE", message: "INVALID_ACCESS_TOKEN_TRY_AGAIN"});
+      res.status(200).json({status: "FAILURE", message: "INVALID_CODE_CHECK_PLEASE_CHECK_DETAILS"});
       return res.send();
     }
   }catch(err){
