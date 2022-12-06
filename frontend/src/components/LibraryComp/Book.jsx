@@ -264,7 +264,7 @@ export default props => {
   };
 
   return (
-    <div>
+    <div className="library-book-container">
       <Row noGutters className="text-center align-items-center room-cta">
         <Col>
           <p className="looking-for-room">

@@ -19,7 +19,7 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
-
+const RoomSchema = require('../models/Room');
 const Day = require("../models/Day").model;
 
 // Parameters:
@@ -33,7 +33,7 @@ router.post("/", function(req, res, next) {
   console.log(req.body);
   const dateTime = new Date(req.body.date);
 
-  Day.find({ date: dateTime }, (err, docs) => {
+  Day.find({ date: dateTime }, async(err, docs) => {
     if (!err) {
       if (docs.length > 0) {
         // Record already exists
@@ -41,7 +41,7 @@ router.post("/", function(req, res, next) {
         res.status(200).send(docs[0]);
       } else {
         // Searched date does not exist and we need to create it
-        const allRooms = require("../data/AllRooms");
+        const allRooms = await RoomSchema.find({isAvailable : true});
         const day = new Day({
           date: dateTime,
           rooms: allRooms

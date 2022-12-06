@@ -14,30 +14,24 @@ const Reservation = require("../models/Reservation").model;
 // 	"email": String
 // }
 
-router.get("/", function(req, res, next) {
-  Day.find( (err, days) => {
-    if (!err) {
+router.get("/", async (req, res, next) => {
+  const days = await Day.find().lean();
+      let room ;
+      let rooms = [];
       if (days.length > 0) {
-        // console.log(days)
-        // let day = days[0];
-        // day.rooms.forEach(room => {
-        //   if (room.isAvailable = false) {
-        //     day.save(err => {
-        //       if (err) {
-        //         console.log(err);
-        //       } else {
-        //         console.log(room.name);
-        //         res.status(200).send(room.name);
-        //       }
-        //     });
-        //   }
-        // });
-        res.status(200).send("room.name");
+        for(let i=0;i< days.length;i++){
+          for(let j=0;j < days[i].rooms.length;j++){
+            room = days[i].rooms[j];
+            if(!room.isAvailable && room?.reservation?.email == 'wejdnjewn'){
+              console.log("Entered inside if block")
+              rooms.push(room);
+            }
+          }
+        }
+        return res.status(200).send(rooms);
       } else {
         console.log("Day not found");
       }
-    }
-  });
-});
+    })
 
 module.exports = router;

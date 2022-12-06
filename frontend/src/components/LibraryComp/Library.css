@@ -6,6 +6,13 @@ body {
   .library-main-container {
     background-image: linear-gradient(rgba(228, 225, 199, 0.863), rgba(232, 228, 198, 0.78)), url("./Images/Library3.webp") ;
   }
+
+  .library-book-container {
+    background-image: linear-gradient(rgba(228, 225, 199, 0.863), rgba(232, 228, 198, 0.78)), url("./Images/Library3.webp") ;
+    background-size: auto;
+    
+  }
+
   .nav-brand {
     cursor: pointer !important;
     font-size: 1.5rem !important;
