@@ -264,7 +264,7 @@ export default props => {
   };
 
   return (
-    <div className="library-book-container">
+    <div className="library-main-container vh-100">
       <Row noGutters className="text-center align-items-center room-cta">
         <Col>
           <p className="looking-for-room">
@@ -384,6 +384,17 @@ export default props => {
               )}
             </Col>
           </Row>
+          <Row>
+                
+          </Row>
+          <Row>
+                
+          </Row>
+          <Row>
+                
+          </Row>
+          
+          
         </div>
       ) : (
         <div id="confirm-reservation-stuff">
