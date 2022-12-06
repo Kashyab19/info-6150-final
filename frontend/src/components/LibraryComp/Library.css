@@ -1,0 +1,374 @@
+body {
+    font-family: ABeeZee, sans-serif !important;
+  }
+  
+
+  .library-main-container {
+    background-image: linear-gradient(rgba(228, 225, 199, 0.863), rgba(232, 228, 198, 0.78)), url("./Images/Library3.webp") ;
+  }
+
+  .library-book-container {
+    background-image: linear-gradient(rgba(228, 225, 199, 0.863), rgba(232, 228, 198, 0.78)), url("./Images/Library3.webp") ;
+    background-size: auto;
+    
+  }
+
+  .nav-brand {
+    cursor: pointer !important;
+    font-size: 1.5rem !important;
+  }
+  
+  @media (min-width: 768px) {
+    .nav-brand {
+      font-size: 1.8rem !important;
+    }
+  }
+  @media (min-width: 992px) {
+    .nav-brand {
+      font-size: 2.8rem !important;
+    }
+  }
+  .room-space {
+    font-size: 1.6rem !important;
+    padding-left: 1.25% !important;
+    color: #e74c3c !important;
+  }
+  
+  .message-icon {
+    font-size: 1.4rem !important;
+    padding-left: 1.25% !important;
+    color: #c9904f !important;
+  }
+  
+  .room-cta {
+    padding-top: 4% !important;
+  }
+  
+  .looking-for-room {
+    font-size: 2.5rem !important;
+    padding-bottom: 1.8% !important;
+    padding-right: 3% !important;
+    padding-left: 3% !important;
+  }
+  
+  .book-room-btn {
+    color: white !important;
+    background-color: red !important;
+    font-size: 1.2rem !important;
+    padding: 2% 8% !important;
+    border-radius: 25px !important;
+    border: 2px red solid !important;
+    font-family: ABeeZee, sans-serif !important;
+  }
+  .book-room-btn:hover {
+    color: #e74c3c !important;
+    background-color: white !important;
+    border: 2px solid black !important;
+  }
+  
+  .modify-room-btn {
+    color: white !important;
+    background-color: red !important;
+    font-size: 1.2rem !important;
+    padding: 2% 8% !important;
+    border-radius: 25px !important;
+    border: 2px red solid !important;
+    font-family: ABeeZee, sans-serif !important;
+    /* margin-top: 1rem !important; */
+    /* margin-left: 10px !important; */
+  }
+  .modify-room-btn:hover {
+    color: #e74c3c !important;
+    background-color: white !important;
+    border: 2px solid black !important;
+  }
+  
+  @media (min-width: 768px) {
+    .book-room-btn {
+      font-size: 1.4rem !important;
+      padding: 0.5% 5% !important;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .modify-room-btn {
+      font-size: 1.4rem !important;
+      padding: 0.5% 5% !important;
+    }
+  }
+  
+  .big-img-container {
+    padding: 10% 0 !important;
+    display: flex !important;
+  }
+  
+  @media (min-width: 768px) {
+    .big-img-container {
+      padding: 4% 0 !important;
+    }
+  }
+  
+  .big-img {
+    width: 90% !important;
+    float: left !important;
+    margin-left: 5% !important;
+    border-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
+  }
+  
+  @media (max-width: 820px) {
+    .big-img {
+      width: 90% !important;
+      border-radius: 25px !important;
+      border-bottom-left-radius: 25px !important;
+    }
+  }
+  
+  .big-img-2 {
+    width: 80% !important;
+    /* float: right !important; */
+    /* margin-right: 5% !important; */
+    border-radius: 25px !important;
+    border-bottom-right-radius: 25px !important;
+  }
+  
+  @media (max-width: 820px) {
+    .big-img-2 {
+      width: 80% !important;
+      border-radius: 25px !important;
+      border-bottom-left-radius: 25px !important;
+    }
+  }
+  
+  .messaga-text {
+    font-size: 20px !important;
+    /* margin-top: 50px !important; */
+    padding: 10px 10px !important;
+    
+  }
+  
+  .message-header {
+    margin-top: 20px !important;
+    font-size: 25px !important;
+    background-color: rgb(216, 229, 193) !important;
+   
+  }
+  
+  .hours-text {
+    padding-left: 20px !important;
+    font-weight: 1000 !important;
+  }
+  
+  .hours-table {
+    border: 1 !important;
+    border-top: 1px solid #b4061f !important;
+    border-width: 90% !important;
+  }
+  
+  .hours-table-body {
+  
+  align-items: center !important;
+}
+  
+  th {
+    text-align: center !important;
+    width: 90% !important;
+  }
+  
+  td {
+    width: 40% !important;
+  }
+  
+  .selected-room {
+    font-size: 1.25rem !important;
+    padding-bottom: 2% !important;
+  }
+  
+  /* input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    display: none !important;
+  } */
+  
+  /* input[type=date]::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none !important;
+    display: none !important;
+  } */
+  
+  .booking-dropdown {
+    width: 85% !important;
+    padding: 4% 0 !important;
+    background-color: #e74c3c !important;
+    color: white !important;
+    margin: 2% 0 !important;
+    font-family: "Roboto" !important;
+    font-size: 1.1rem !important;
+    border: none !important;
+    border-radius: 5px !important;
+    text-align: center !important;
+  }
+  .booking-dropdown:hover {
+    background-color: #e74c3c !important;
+    color: white !important;
+  }
+  .booking-dropdown:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  .booking-dropdown-menu {
+    outline: none !important;
+  }
+  .booking-dropdown-item:hover {
+    background-color: white !important;
+  }
+  .booking-dropdown-item:active {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  @media (min-width: 768px) {
+    .booking-dropdown {
+      font-size: 1.2rem !important;
+    }
+  }
+  .room-display-message {
+    padding: 2% 0 !important;
+    text-align: center !important;
+    font-size: 1.3rem !important;
+    color: white !important;
+  }
+  
+  .rooms-display {
+    background-color: #e74c3c !important;
+    margin: 10% 2% !important;
+    padding: 3% 5% !important;
+    border-radius: 25px !important;
+  }
+  
+  @media (min-width: 768px) {
+    .rooms-display {
+      margin: 6% 2.5% !important;
+    }
+  }
+  .room-key {
+    padding-top: 1% !important;
+    padding-bottom: 4.5% !important;
+    color: white !important;
+  }
+  
+  .available-rooms {
+    color: white !important;
+    font-size: 1.2rem !important;
+    font-family: Roboto, sans-serif !important;
+  }
+  
+  .room-container {
+    margin: 1% 1.5% !important;
+    width:fit-content !important;
+  }
+  
+  .room {
+    background-color: rgba(245, 246, 250, 0.4) !important;
+    padding: 10px !important;
+    border-radius: 20px !important;
+    min-width: 70px !important;
+  }
+  
+  .room-row {
+    margin-bottom: 8px !important;
+  }
+  
+  .selectable-room:hover {
+    cursor: pointer !important;
+  }
+  .selectable-room:hover-row {
+    padding: 5px !important;
+  }
+  
+  
+  .full-room {
+    background-color: white !important;
+    border: solid 2px white !important;
+    border-radius: 50% !important;
+    padding: 1px 10px !important;
+    margin: 3px !important;
+  }
+  
+  .empty-room {
+    background-color: #e74c3c !important;
+    border: solid 2px white !important;
+    border-radius: 50% !important;
+    padding: 1px 10px !important;
+    margin: 3px !important;
+  }
+  
+  .room-name {
+    color: white !important;
+    font-size: 0.8rem !important;
+    padding-top: 15px !important;
+    font-family: Roboto, sans-serif !important;
+  }
+  
+  .reservation-details-container {
+    padding: 0 4% !important;
+    padding-bottom: 5% !important;
+  }
+  
+  .reservation-details {
+    margin: 0 2% !important;
+    margin-bottom: 5% !important;
+  }
+  
+  @media (min-width: 768px) {
+    .reservation-details {
+      margin-bottom: 0 !important;
+    }
+  }
+  .reservation-input:focus {
+    border-color: black !important;
+    box-shadow: 0 0 !important;
+  }
+  
+  .reservation-error {
+    color: #c0392b !important;
+    font-size: 1.1rem !important;
+    padding-bottom: 3% !important;
+  }
+  
+  
+  .thanks-header {
+    padding: 5% 0 !important;
+    padding-top: 10% !important;
+    font-size: 2.5rem !important;
+  }
+  
+  .thanks-subtext {
+    font-size: 1.2rem !important;
+    padding: 2% !important;
+  }
+  
+  .thank-you-room {
+    font-size: 4rem !important;
+    color: #e74c3c !important;
+    padding-bottom: 8% !important;
+  }
+  
+  @media (min-width: 768px) {
+    .thanks-header {
+      font-size: 5.5rem !important;
+    }
+  
+    .thanks-subtext {
+      font-size: 2.2rem !important;
+    }
+  
+    .thank-you-room {
+      font-size: 7rem !important;
+      padding-bottom: 4% !important;
+    }
+  }
+  
+  .modify-header {
+    padding: 5% 0 !important;
+    padding-top: 5% !important;
+    font-size: 2rem !important;
+  }
