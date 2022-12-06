@@ -12,12 +12,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef } from "react";
 import { useState, useContext } from "react";
-import { Scrollspy } from "@makotot/ghostui";
 import AuthenticationContext from "../context/AuthenticationContext";
 import { useEffect } from "react";
 import ProfileComponent from "../components/ProfileComponent";
 import LibraryBooking from "../components/LibraryComp/LibraryBooking";
-import { Route, Routes,Link } from "react-router-dom";
+import RedEye from "./RedEye";
+import { Route, Routes, Link } from "react-router-dom";
 
 const SIZE = 5;
 const list = new Array(SIZE).fill(0);
@@ -84,10 +84,10 @@ const ProfilePage = () => {
               </a>
             </li>
             <li>
-              <a href="#portfolio" className="nav-link scrollto">
+              <Link to="/redeye"  className="nav-link scrollto">
                 <FontAwesomeIcon icon={faCar}></FontAwesomeIcon>
                 <span>Redeye</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#services" className="nav-link scrollto">
@@ -106,7 +106,8 @@ const ProfilePage = () => {
       </header>
       <Routes>
         <Route path="/profile" element={<ProfileComponent />} />
-        <Route path="/library" element={<LibraryBooking />}></Route>
+        <Route path="/library" element={<LibraryBooking />}/>
+        <Route path="/redEye" element={<RedEye />} />
       </Routes>
     </div>
   );

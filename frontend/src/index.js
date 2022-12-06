@@ -36,7 +36,6 @@ root.render(
         <Route exact={true} path="/signup" element={<Register/>} />
         <Route exact={true} path="/verify" element={<Verification/>} />
         {/* <Route exact={true} path="/signup" element={<Register/>} /> */}
-          <Route exact={true} path="/RedEye" element={<RedEye/>} />
 </Routes>
     </AuthenticationContextProvider>
   </BrowserRouter>
