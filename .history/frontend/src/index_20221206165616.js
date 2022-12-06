@@ -28,7 +28,7 @@ root.render(
   <BrowserRouter>
     <AuthenticationContextProvider>
       <Routes>
-        <Route exact={true} path="/*" element={<App />} />
+        <Route exact={true} path="/" element={<App />} />
         <Route exact={true} path="/profile" element={<ProfilePage />} />
 
         <Route exact={true} path="/add-products" element={<AddProducts />} />
