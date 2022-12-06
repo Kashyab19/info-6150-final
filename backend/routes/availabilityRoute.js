@@ -20,7 +20,7 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 
-const Day = require("../models/day").model;
+const Day = require("../models/Day").model;
 
 // Parameters:
 // {
@@ -41,7 +41,7 @@ router.post("/", function(req, res, next) {
         res.status(200).send(docs[0]);
       } else {
         // Searched date does not exist and we need to create it
-        const allRooms = require("../data/allRooms");
+        const allRooms = require("../data/AllRooms");
         const day = new Day({
           date: dateTime,
           rooms: allRooms

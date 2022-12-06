@@ -2,8 +2,8 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 
-const Day = require("../models/day").model;
-const Reservation = require("../models/reservation").model;
+const Day = require("../models/Day").model;
+const Reservation = require("../models/Reservation").model;
 
 // Parameters:
 // {
@@ -18,27 +18,21 @@ router.get("/", function(req, res, next) {
   Day.find( (err, days) => {
     if (!err) {
       if (days.length > 0) {
-        console.log(days)
+        // console.log(days)
         // let day = days[0];
         // day.rooms.forEach(room => {
-        //   if (room._id == req.body.room) {
-        //     room.reservation = new Reservation({
-        //       name: req.body.name,
-        //       phone: req.body.phone,
-        //       email: req.body.email
-        //     });
-        //     room.isAvailable = false;
+        //   if (room.isAvailable = false) {
         //     day.save(err => {
         //       if (err) {
         //         console.log(err);
         //       } else {
-        //         console.log("Reserved");
-        //         res.status(200).send("Added Reservation");
+        //         console.log(room.name);
+        //         res.status(200).send(room.name);
         //       }
         //     });
         //   }
         // });
-        res.status(200).send("Added Reservation");
+        res.status(200).send("room.name");
       } else {
         console.log("Day not found");
       }

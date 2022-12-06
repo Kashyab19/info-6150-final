@@ -2,8 +2,8 @@ var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
 
-const Day = require("../models/day").model;
-const Reservation = require("../models/reservation").model;
+const Day = require("../models/Day").model;
+const Reservation = require("../models/Reservation").model;
 
 // Parameters:
 // {

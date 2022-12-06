@@ -21,4 +21,4 @@
 // let data = JSON.stringify({
 //   rooms: fakeRooms
 // });
-// fs.writeFileSync(__dirname + "/allRooms.json", data);
+// fs.writeFileSync(__dirname + "/AllRooms.json", data);

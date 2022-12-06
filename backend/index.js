@@ -33,8 +33,8 @@ mongoose.connect(
 
  
 app.use("/api/products", productRouter);
-app.use("/availability", require("./routes/availabilityRoute"));
-app.use("/reserve", require("./routes/reservationRoute"));
-app.use("/bookings", require("./routes/yourBookingRoute"));
+app.use("/availability", require("./routes/AvailabilityRoute"));
+app.use("/reserve", require("./routes/ReservationRoute"));
+app.use("/bookings", require("./routes/YourBookingRoute"));
 
 module.exports = app;

@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-const reservationSchema = require("./reservation").schema;
+const reservationSchema = require("./Reservation").schema;
 
 var roomSchema = new mongoose.Schema({
   name: String,

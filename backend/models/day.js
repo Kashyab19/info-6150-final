@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-const roomSchema = require("./room").schema;
+const roomSchema = require("./Room").schema;
 
 var daySchema = new mongoose.Schema({
   date: Date,
