@@ -23,4 +23,7 @@ code {
   align-items: flex-start;
 }
 
+.product-column{
+  margin-right: 0px !important;
+}
 /* AddProducts.jsx ends */

@@ -172,21 +172,12 @@ const AddProducts = () =>{
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <FileBase64
-                        type="file"
-                        multiple={false}
-                        onDone={({ base64 }) => setNewProduct(
-                            {
-                            ...newProduct,
-                            firstPhoto: base64
-                            }
-                        )}                    />
                 </Form.Group>
 
                 <div className='d-flex justify-content-center'>
                     <Button className='' variant="primary" type="submit"> Submit </Button>
                 </div>   
-        </Form>
+                </Form>
 
                             <Modal open={flags.showModal}>
                                 <Modal.Dialog>
