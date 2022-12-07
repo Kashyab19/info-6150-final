@@ -6,7 +6,10 @@ import {Row, Col} from 'react-bootstrap';
 import "../styles/AddProducts.css"
 import { useState } from 'react';
 import axios from 'axios';
-import FileBase64 from 'react-file-base64';
+import { Link } from 'react-router-dom'
+
+import Card from 'react-bootstrap/Card';
+
 
 const usaStates = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
 const conditionOfTheProducts = ['Bad','Good', 'Better', 'Best']
@@ -18,6 +21,7 @@ const AddProducts = () =>{
         showModal : false
     })
     const [newProduct, setNewProduct] = useState( {
+        productOwner: "",
         productName : "",
         productPrice: "",
         location:{
@@ -41,7 +45,7 @@ const AddProducts = () =>{
         console.log("At Handle Submit");
 
         var productAdded = newProduct;
-        alert("Your product has been added")
+        alert("Your product has been added");
         axios.post("http://127.0.0.1:3001/api/products/add-product", productAdded)
             .then(response =>{
                 console.log(response);
@@ -66,7 +70,7 @@ const AddProducts = () =>{
                 colour: ""
             }
         })
-
+        {<Link to="/add-products"></Link>}
         console.log(newProduct);
     }
     const handleModal = (e) => {
@@ -94,9 +98,15 @@ const AddProducts = () =>{
         
     }
     return(
-        <div className="add-product-container ">
+        <div className="add-product-container">
+            
+
             <Form onSubmit={handleSubmit} autoComplete="off" validate = "true" encType='multipart/form-data' >
                 <h4> Product Details </h4>
+                <Form.Group className="mb-3" controlId="formBasicEmail" hidden>
+                    <Form.Control type="text" placeholder="Product Name*" name="productName" value={newProduct.productOwner} onChange={handleChange}/>
+                </Form.Group>
+
                 <Form.Group className="mb-3" controlId="formBasicEmail" required>
                     <Form.Control type="text" placeholder="Product Name*" name="productName" value={newProduct.productName} onChange={handleChange}/>
                 </Form.Group>
@@ -175,9 +185,20 @@ const AddProducts = () =>{
                 </Form.Group>
 
                 <div className='d-flex justify-content-center'>
-                    <Button className='' variant="primary" type="submit"> Submit </Button>
+                    <Button className='request-btn' variant="primary" type="submit"> Submit </Button>
                 </div>   
                 </Form>
+                <br/>
+                <Card className='w-75 justify-content-center align-items-center'>
+                 <Card.Body>Go to marketplace! 🏪 &nbsp;
+                    <Button variant="primary" className='request-btn text-decoration-none'>
+                    <Link to="/marketPlace" className='text-decoration-none text-light'>
+                        Explore
+                    </Link>
+                        
+                    </Button>
+                </Card.Body>
+            </Card>
 
                             <Modal open={flags.showModal}>
                                 <Modal.Dialog>
