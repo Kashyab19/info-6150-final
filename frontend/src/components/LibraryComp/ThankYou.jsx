@@ -3,7 +3,7 @@ import { Row, Col } from "reactstrap";
 
 export default _ => {
   return (
-    <div>
+    <div className="library-main-container vh-100">
       <Row noGutters className="text-center">
         <Col>
           <p className="thanks-header">Thank You!</p>

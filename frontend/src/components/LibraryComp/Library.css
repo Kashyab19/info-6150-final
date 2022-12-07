@@ -371,3 +371,10 @@ body {
     padding-top: 5% !important;
     font-size: 2rem !important;
   }
+
+ 
+  .card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
