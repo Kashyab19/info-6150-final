@@ -24,6 +24,7 @@ router.get("/", async (req, res, next) => {
             room = days[i].rooms[j];
             if(!room.isAvailable && room?.reservation?.email == req.query.email){
               console.log("Entered inside if block")
+              room.bookingtime = days[i].date;
               rooms.push(room);
             }
           }

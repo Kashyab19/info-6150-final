@@ -297,6 +297,7 @@ export default props => {
             <Col xs="12" sm="3">
               <input
                 type="date"
+                min = "2022-12-06"
                 required="required"
                 className="booking-dropdown"
                 value={selection.date.toISOString().split("T")[0]}
