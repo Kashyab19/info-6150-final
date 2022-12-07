@@ -8,15 +8,17 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Modal from 'react-bootstrap/Modal';
 
 import ListGroup from 'react-bootstrap/ListGroup';
-
+import AuthenticationContext from '../context/AuthenticationContext';
+import { useContext } from 'react';
 const ProductNavigationBar = () => {
 
     const [products, setProducts] = useState(
         []
     )
+
+    const {auth} = useContext(AuthenticationContext);
     
     const [flags, setFlags] = useState({
         modalFlag:false
@@ -41,7 +43,7 @@ const ProductNavigationBar = () => {
     console.log(flags)
     return(
         <>
-        <Navbar bg="light" variant="light">
+        {/* <Navbar bg="light" variant="light">
             <Navbar.Brand href="#home">Northeastern</Navbar.Brand>
             <Nav className="me-auto">
                     <LinkContainer to="/add-products">
@@ -53,15 +55,15 @@ const ProductNavigationBar = () => {
                     <Nav.Link>Logout</Nav.Link>
                 
             </Nav>
-        </Navbar>
-         <div className="container">
-         <Row>
+        </Navbar> */}
+         <div className="container ">
+         <Row className='d-flex justify-content-center'>
             {
             products.data?.map(
                 (p) =>{
                     return(
-                        <Col className='col-3'>
-                            <Card style={{ width: '18rem', border: '1px solid black', margin: '10px' }}>
+                        <Col className='col-lg-3 col-md-5 col-12 m-2 d-flex justify-content-center' >
+                            <Card style={{ width: '18rem', border: '1px solid black'}}>
                             <Card.Body>
                             <Card.Title>{p.productName}</Card.Title>
                             <Card.Text>${p.productPrice}</Card.Text>

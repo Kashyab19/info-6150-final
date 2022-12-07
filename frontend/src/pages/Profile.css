@@ -133,6 +133,7 @@
   cursor: pointer;
   border-radius: 25px;
   padding: 5px;
+  color: grey;
 }
 
 .mobile-nav-toggle i {
