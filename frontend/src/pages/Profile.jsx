@@ -119,10 +119,17 @@ const ProfilePage = () => {
               </Link>
             </li>
             <li>
-              <a href="#services" className="nav-link scrollto">
+              <Link
+                to="/marketplace"
+                className={
+                  location.pathname === "/marketplace"
+                    ? "nav-link scrollto active"
+                    : "nav-link scrollto"
+                }
+              >
                 <FontAwesomeIcon icon={faShop}></FontAwesomeIcon>
                 <span>Market Place</span>
-              </a>
+              </Link>
             </li>
             <li>
               <a href="#services" className="nav-link scrollto">
@@ -138,9 +145,8 @@ const ProfilePage = () => {
           <Route path="/profile" element={<ProfileComponent />} />
           <Route path="/library" element={<LibraryBooking />} />
           <Route path="/redEye" element={<RedEye />} />
-          <Route  path="/add-products" element={<AddProducts />} />
-          <Route  path="/marketPlace" element={<ProductNavigationBar />} />
-
+          <Route path="/add-products" element={<AddProducts />} />
+          <Route path="/marketPlace" element={<ProductNavigationBar />} />
         </Routes>
       </div>
     </div>
