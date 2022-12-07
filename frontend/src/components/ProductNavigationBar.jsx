@@ -6,7 +6,11 @@ import { useState, useEffect } from 'react';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
+
+import ListGroup from 'react-bootstrap/ListGroup';
 
 const ProductNavigationBar = () => {
 
@@ -51,22 +55,34 @@ const ProductNavigationBar = () => {
             </Nav>
         </Navbar>
          <div className="container">
-         {
+         <Row>
+            {
             products.data?.map(
                 (p) =>{
                     return(
-                        <Card style={{ margin:'10px' ,width: '20rem', border:'1px solid black' }}>
-                                <Card.Body>
-                                    <Card.Title>{p.productName}</Card.Title>
-                                    <Card.Text>{p.productPrice}
-                                    </Card.Text>
-                                    <Button variant="primary" onClick={handleRequestSubmit}>Request</Button>
-                                </Card.Body>
-                        </Card>
+                        <Col className='col-3'>
+                            <Card style={{ width: '18rem', border: '1px solid black', margin: '10px' }}>
+                            <Card.Body>
+                            <Card.Title>{p.productName}</Card.Title>
+                            <Card.Text>${p.productPrice}</Card.Text>
+                            </Card.Body>
+                            <ListGroup className="list-group-flush">
+                                <ListGroup.Item>{p.location.address1}&nbsp;{p.location.address2}</ListGroup.Item>
+                                <ListGroup.Item>{p.location.city},&nbsp;{p.location.state}, &nbsp;{p.location.zipcode}</ListGroup.Item>
+                                <ListGroup.Item>Condition: {p.details.productCondition}</ListGroup.Item>
+                                <ListGroup.Item>Material: {p.details.productMaterial}</ListGroup.Item>
+                                <ListGroup.Item>Colour: {p.details.colour}</ListGroup.Item>
+                            </ListGroup>
+                            <Button variant="primary" onClick={handleRequestSubmit}>Request</Button>
+                            
+                            </Card>
+                        </Col>
                     )
                 }
             )
         }
+        </Row>
+         
         
         </div>
     </>
