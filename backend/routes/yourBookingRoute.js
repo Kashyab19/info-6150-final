@@ -22,7 +22,7 @@ router.get("/", async (req, res, next) => {
         for(let i=0;i< days.length;i++){
           for(let j=0;j < days[i].rooms.length;j++){
             room = days[i].rooms[j];
-            if(!room.isAvailable && room?.reservation?.email == 'wejdnjewn'){
+            if(!room.isAvailable && room?.reservation?.email == req.query.email){
               console.log("Entered inside if block")
               rooms.push(room);
             }
