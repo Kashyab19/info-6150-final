@@ -8,3 +8,7 @@ exports.createProduct = async (creds) => {
 exports.deleteAllProducts = async() => {
     return await ProductModelSchema.deleteMany();
 }
+
+exports.getAllProducts = async() => {
+  return await ProductModelSchema.find();
+}

@@ -66,3 +66,8 @@ exports.passwordReset = (req, res) => {
   return authenicateService.passwordReset({...req.body}, res);
 };
 
+
+exports.updateProfile = (req, res) => {
+  return authenicateService.updateProfile(req, res);
+};
+

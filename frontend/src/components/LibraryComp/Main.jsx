@@ -35,7 +35,7 @@ const Main = props => {
         </Col>
       </Row>
       <Row noGutters className="text-center big-img-container">
-        <Col md="6">
+        <Col md="5" className="offset-lg-1">
         
           <img
             src={require("./Images/Library.jpg")}
@@ -53,7 +53,7 @@ const Main = props => {
       </Row>
 
       <Row noGutters className="text-center big-img-container">
-        <Col md="6" className="hours-text">
+        <Col md="5" className="hours-text offset-lg-1">
           <h1>Hours</h1>
           <h2>Snell Library Open 24 Hours</h2>
           <p><strong>The library building is open 24 hours! </strong></p>
