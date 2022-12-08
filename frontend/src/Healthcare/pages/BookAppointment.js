@@ -39,7 +39,7 @@ function BookAppointment() {
   }
 
   return (
-    <div className='mainDiv myBgFC'><br></br>
+    <div className='mainDiv myBgFC mainDivAppointmentBooking'><br></br>
       <h1 className='header myTextColor'>**Make An Appointment**</h1><br></br>
       <h2 className='myTextColor'>Students who have the <a href='https://studenthealthplan.northeastern.edu' target={'blank'}>Northeastern University Student Health Plan (NUSHP)</a> can access live virtual clinical visits through<a href='https://studenthealthplan.northeastern.edu/telehealth-benefit/#_ga=2.169370977.1301097557.1670258119-912079606.1669502458' target={'blank'}> Well Connection.</a> This service provides licensed doctors and clinicians for minor medical and behavioral health care using their preferred device (cell phone, laptop, tablet, etc.). For more information <a href='https://cpb-us-w2.wpmucdn.com/404.html' target={'blank'}>click here</a>. When UHCS is closed, please visit a local urgent care or emergency department for immediate concerns.</h2>
       <div className='app'><br></br><br></br>

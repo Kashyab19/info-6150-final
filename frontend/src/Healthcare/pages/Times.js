@@ -13,6 +13,33 @@ function Times(props) {
     setEvent(e.target.innerText);
   }
 
+  /* const time = async () => {
+    try {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ policyNum: searchInput})
+      };
+      console.log('Body sent to backend is ' + requestOptions.body);
+      const response = await fetch('http://localhost:3001/getPolicyDetails', requestOptions);
+      const responseText = await response.text();
+      console.log(responseText);
+      if (JSON.parse(responseText).response === "SUCCESS") {
+        setIfNotFound(false);
+        togglePopup();
+        //console.log("My loginState in Login.js success is " + loginState);
+      }
+      else {
+        //console.log("My loginState in Login.js failure is " + loginState);
+        setIfNotFound(true);
+      }
+    } catch (error) {
+      setIfNotFound(true);
+      //console.log("My loginState in Login.js failure is " + loginState);
+      alert("Request error!");
+    }
+  }; */
+
   return (
 
     <>

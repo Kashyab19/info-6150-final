@@ -5,11 +5,13 @@
  */   font-family: "Arial", "Helvetica Neue", "sans-serif";
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smothing: grayscale;
-   font-family: fantasy !important;
+   /* font-family: fantasy !important; */
+   font-family: 'Roboto', sans-serif;
+
  }
 
  body a{
-  color:#00f7ff;
+  color:#2fe4eae3;
   font-size: large;
   text-decoration: underline;
  }

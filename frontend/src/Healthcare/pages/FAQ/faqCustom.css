@@ -2,5 +2,14 @@
     text-align: center;
     text-decoration: underline;
     font-size:larger;
-    color: aliceblue;
+    color: white;
 }
+
+@media screen and (max-width: 768px) {
+    .myDivFaq{
+        height: 942px;
+    }
+    
+}
+
+

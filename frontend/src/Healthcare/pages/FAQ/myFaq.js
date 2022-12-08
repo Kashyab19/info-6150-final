@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
 `;
 export const Entity = styled.div`
-  color: #2a8570ed;
+  color: #ecf4f2;
   border: 1px solid #070707;
   max-width: 690px;
   width: 99%;
@@ -62,5 +62,6 @@ export const Header = styled.h1`
     font-size: 33px;
   }
 
-  color: aliceblue;
+  color: white;
 `;
+//#2a8570ed
