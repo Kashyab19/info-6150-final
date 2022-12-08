@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.myBg{
+    background-image: url('../Images/bgImage.jpeg');
+}
+
+.mt-10 {
+  margin-top: 0.5rem;
+}
+
+/*About*/
+
+@media screen and (max-width: 768px) {
+
+  /* .myHome {
+    text-align: center;
+     margin-left: 36%;
+ 
+    font-size: xx-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  } */
+  .mainDivAbout {
+    height: auto;
+
+  }
+
+  .myCardBody {
+    background-color: rgb(20, 133, 180);
+    height: auto;
+    padding: 25px;
+    margin: 5px;
+  }
+
+  .myHomeSubtitle,
+  .additionalHeader,
+  .myHome {
+    /*       margin-left: 20%;
+ */
+    text-align: center;
+
+    font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+
+}
+
+@media screen and (min-width: 1440px) {
+
+  /* .myHome {
+
+    margin-left: 44%;
+
+    text-align: center;
+    font-size: xx-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  } */
+  .mainDivAbout {
+    height: auto;
+  }
+
+  .myCardBody {
+    background-color: rgb(20, 133, 180);
+    height: auto;
+    padding: 25px;
+    margin: 5px;
+  }
+
+  .myHomeSubtitle,
+  .additionalHeader,
+  .myHome {
+    /*       margin-left: 35%;
+ */
+    text-align: center;
+    font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+}
+
+.myImg {
+  width: 100%;
+}
+
+.myBgFC {
+  background-image: url('/Users/rushikeshdeore/Desktop/Fall22/INFO6150/FinalProject/info6150-project/frontend/src/Healthcare/pages/Images/diffBG.jpeg');
+
+}
+
+.myHomeText {
+  /*   font-family: fantasy;
+   */
+  font-size: large;
+}
+/* .benefitsHIS ul{
+  text-align: center;
+} */
+/*About*/
