@@ -46,7 +46,9 @@
   }
 
 }
-
+.myCardBody {
+  background-color: rgb(20, 133, 180);
+}
 @media screen and (min-width: 1440px) {
 
   /* .myHome {
@@ -84,7 +86,7 @@
 }
 
 .myBgFC {
-  background-image: url('/Users/rushikeshdeore/Desktop/Fall22/INFO6150/FinalProject/info6150-project/frontend/src/Healthcare/pages/Images/diffBG.jpeg');
+  background-image: url('../Images/diffBG.jpeg');
 
 }
 

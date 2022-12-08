@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import useAxiosPrivate from "../../context/useAxiosPrivate";
 import Room from "./Room";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthenticationContext from "../../context/AuthenticationContext";
 export default props => {
   const [totalRooms, setTotalRooms] = useState([]);

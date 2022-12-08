@@ -47,6 +47,7 @@ app.use("/api/products", productRouter);
 app.use("/availability", require("./routes/AvailabilityRoute"));
 app.use("/reserve", require("./routes/ReservationRoute"));
 app.use("/bookings", require("./routes/YourBookingRoute"));
+app.use("/redeye", require("./routes/redeyeRoutes"));
 
 
 module.exports = app;

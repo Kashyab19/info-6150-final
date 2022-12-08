@@ -6,7 +6,31 @@
     background-size: cover;
 } */
 
-.add-product-container ul {
+
+.display-courses {
+    text-align: center;
+}
+.selCourses {
+    /* display: flex;
+    margin: 1px;
+    padding: 5px;
+    color:black;
+    text-decoration: none; */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  .course-selected li {
+    display: flex;
+    margin: 1px 1px 1px 30px;
+    padding: 5px;
+    color:black;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+.form-head {
     position: relative;
     padding: 0;
     margin: 0;
@@ -17,59 +41,24 @@
     list-style: none;
     text-decoration: none;
   }
-  .add-product-container ul li {
+  .form-head li{
     display: flex;
     margin: 1px;
     padding: 5px;
-    color:black; 
+    color:black;
     text-decoration: none;
     text-align: center;
   }
-.add-product-container ul li:last-child {
+  .form-head li:last-child {
     position: absolute;
     top: 0;
     right: 0;
   }
-.add-product-container .viewSelected {
+  .class-summary li {
+    display: flex;
+    margin: 1px;
+    padding: 5px;
     color:black;
     text-decoration: none;
-}
-
-.add-product-container {
-    background-color: whitesmoke;
-    /* width: 8em; */
-    
-}
-.add-product-container .form-head {
-    
     text-align: center;
-}
-
-.add-product-container .form-check .form-comp {
-    margin-right: 100px !important
-}
-
-.add-product-container .form-check .buttons {
-    margin-left: 50px !important;
-    margin-right: 1 0px !important
-}
-
-.add-product-container .course-check-box  {
-    margin-right: 10px;
-}
-
-.add-product-container .form-comp {
-    display: flex;
-}
-
-.add-product-container details > summary {
-    list-style: none;
   }
-
-.add-product-container details summary::-webkit-details-marker {
-    display:none;
-  }
-
-  .add-product-container .submitButton {
-    background-color: rgb(231, 37, 37);
-}

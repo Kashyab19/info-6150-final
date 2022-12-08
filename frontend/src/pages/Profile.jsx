@@ -92,7 +92,7 @@ const ProfilePage = () => {
                 height="30"
                 className="d-inline-block align-top"
               />{" "}
-              Northastern University
+              Northeastern University
             </Navbar.Brand>
           </Container>
         </Navbar>

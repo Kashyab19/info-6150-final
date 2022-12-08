@@ -5,6 +5,7 @@ import Time from './Time'
 import { Form, Button } from "react-bootstrap";
 //import  from "react-bootstrap/Button";
 import { UserContext } from '../../App.js'
+import AuthenticationContext from '../../context/AuthenticationContext';
 
 
 
@@ -15,11 +16,12 @@ import { UserContext } from '../../App.js'
 function BookAppointment() {
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false);
-  const [email, setEmail] = useState("");
+  const {auth} = useContext(AuthenticationContext);
+  const [email, setEmail] = useState(auth.email);
   const [phoneNum, setphoneNum] = useState("");
-  const [fullName, setfullName] = useState("");
+  const [fullName, setfullName] = useState(auth.firstName);
 
-
+  
   const { isValueFilled, setisValueFilled } = useContext(UserContext);
 
   function handleClick() {
