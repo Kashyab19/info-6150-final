@@ -270,7 +270,7 @@ export default props => {
   };
 
   return (
-    <div className="library-main-container vh-100">
+    <div className="library-book-container vh-100  justify-content-center">
       <Row noGutters className="text-center align-items-center room-cta">
         <Col>
           <p className="looking-for-room">
@@ -299,11 +299,11 @@ export default props => {
 
       {!selection.room.id ? (
         <div id="reservation-stuff">
-          <Row noGutters className="text-center align-items-center">
+          <Row noGutters className="text-center align-items-center offset-lg-1">
             <Col xs="12" sm="3">
               <input
                 type="date"
-                min = "2022-12-06"
+                min = "2022-12-08"
                 required="required"
                 className="booking-dropdown"
                 value={selection.date.toISOString().split("T")[0]}
@@ -385,13 +385,13 @@ export default props => {
                   <p className="room-display-message">No Available Rooms</p>
                 )
               ) : (
-                <p className="room-display-message">
+                <p className="room-display-message ">
                   Please select a date and time for your reservation.
                 </p>
               )}
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
                 
           </Row>
           <Row>
@@ -399,7 +399,7 @@ export default props => {
           </Row>
           <Row>
                 
-          </Row>
+          </Row> */}
           
           
         </div>

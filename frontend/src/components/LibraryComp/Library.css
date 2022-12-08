@@ -5,11 +5,11 @@ body {
 
   .library-main-container {
     background-image: linear-gradient(rgba(228, 225, 199, 0.863), rgba(232, 228, 198, 0.78)), url("./Images/Library3.webp") ;
+    
   }
 
   .library-book-container {
     background-image: linear-gradient(rgba(228, 225, 199, 0.863), rgba(232, 228, 198, 0.78)), url("./Images/Library3.webp") ;
-     
   }
 
   .nav-brand {
@@ -48,6 +48,7 @@ body {
     padding-bottom: 1.8% !important;
     padding-right: 3% !important;
     padding-left: 3% !important;
+    
   }
   
   .book-room-btn {
@@ -237,17 +238,20 @@ body {
   }
   
   .rooms-display {
+    /* display: flex !important; */
+    /* justify-content: center; */
+    width: 85% !important;
     background-color: #e74c3c !important;
-    margin: 10% 2% !important;
+    margin: 10% 10% 10% 10% !important;
     padding: 3% 5% !important;
     border-radius: 25px !important;
   }
   
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     .rooms-display {
-      margin: 6% 2.5% !important;
+      margin: 6% 2.5% 20% !important;
     }
-  }
+  } */
   .room-key {
     padding-top: 1% !important;
     padding-bottom: 4.5% !important;
