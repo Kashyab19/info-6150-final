@@ -96,14 +96,14 @@ const ProfileComponent = () => {
         });
       });
   };
-  const sectionRefs = [useRef(), useRef(), useRef(), useRef(), useRef()];
+  const sectionRefs = [useRef(), useRef()];
   const data = [
     "Contact information",
     "About me",
-    "Projects",
-    "Skills and expertise",
-    "Schools and education",
-    "Interests and hobbies",
+    // "Projects",
+    // "Skills and expertise",
+    // "Schools and education",
+    // "Interests and hobbies",
   ];
   const getMaxDate = () => {
     function subtractYears(numOfYears, date = new Date()) {
@@ -523,7 +523,7 @@ const ProfileComponent = () => {
                 </div>
               </div>
 
-              <div
+              {/* <div
                 id="section-3"
                 ref={sectionRefs[3]}
                 className={
@@ -572,7 +572,7 @@ const ProfileComponent = () => {
                 <div className="col-6">
                   <h2>h1. Bootstrap heading</h2>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         )}

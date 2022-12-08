@@ -192,7 +192,7 @@ const AddProducts = () =>{
                 <Card className='w-75 justify-content-center align-items-center'>
                  <Card.Body>Go to marketplace! 🏪 &nbsp;
                     <Button variant="primary" className='request-btn text-decoration-none'>
-                    <Link to="/marketPlace" className='text-decoration-none text-light'>
+                    <Link to="/home/marketPlace" className='text-decoration-none text-light'>
                         Explore
                     </Link>
                         

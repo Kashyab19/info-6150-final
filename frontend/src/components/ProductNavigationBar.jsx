@@ -42,9 +42,9 @@ const ProductNavigationBar = () => {
          <div className="container">
 
             <Card className='w-75 justify-content-center align-items-center'>
-                 <Card.Body>Hey👋,  {auth.user}&nbsp;Do you want to sell your products? &nbsp;
+                 <Card.Body>Hey👋,  {auth.firstName}&nbsp;Do you want to sell your products? &nbsp;
                     <Button variant="primary" className='request-btn'>
-                    <Link to="/add-products" className='text-decoration-none text-light'>
+                    <Link to="/home/add-products" className='text-decoration-none text-light'>
                         Add Products
                     </Link>
                         

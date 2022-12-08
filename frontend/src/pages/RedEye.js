@@ -32,7 +32,7 @@ import {
 import RedEyeCard from '../components/RedEyeCard'
 import { FaLocationArrow, FaTimes } from 'react-icons/fa'
 import AuthenticationContext from '../context/AuthenticationContext'
-import axios from '../api/axios'
+import axios, { axiosPrivate } from '../api/axios'
 {/* <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>   */ }
 
 const center = { lat: 42.338729, lng: -71.088404 }
@@ -53,9 +53,10 @@ function RedEye() {
   const google = window.google;
 
   //export default {destination,bookingTime,email};
+  const { auth } = useContext(AuthenticationContext);
 
-  axios.post("/RedEye/getAllTrips", JSON.stringify({
-    email: "ijk123@gmail.com",
+  axiosPrivate.post("/RedEye/getAllTrips", JSON.stringify({
+    email: auth.email,
   }),
     {
       headers: { "Content-Type": "application/json" },
@@ -77,7 +78,7 @@ function RedEye() {
     });
 
 
-  const { auth } = useContext(AuthenticationContext);
+  
   const { isLoaded } = useJsApiLoader({
     //googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     googleMapsApiKey: 'AIzaSyDoKTybKvgp09eBiRCPBB7Ar5eFq22uGps',
@@ -152,8 +153,8 @@ function RedEye() {
 
   async function addTrip() {
     console.log("About to add trip")
-    axios.post("/RedEye/addTrip", JSON.stringify({
-      email: "ijk123@gmail.com",
+    axiosPrivate.post("/RedEye/addTrip", JSON.stringify({
+      email: auth.email,
       destination: destiantionRef.current.value,
       bookingtime: new Date(),
       

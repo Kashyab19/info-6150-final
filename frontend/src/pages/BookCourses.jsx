@@ -326,7 +326,7 @@ const BookCourses = () =>{
                     <ul className='form-head'>
                         <li><h4 > Course List </h4></li>
                         <li>
-                        <Link className='viewSelected' to= '/view-course' >
+                        <Link className='viewSelected' to= '/home/view-course' >
                             {console.log(selectedCourses)}
                             View my Courses 
                         </Link>
