@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useContext } from "react";
 import {
   Row,
   Col,
@@ -9,12 +10,15 @@ import {
   Input,
   Button
 } from "reactstrap";
-
+import useAxiosPrivate from "../../context/useAxiosPrivate";
 import Room from "./Room";
-
+import { useLocation, useNavigate } from "react-router";
+import AuthenticationContext from "../../context/AuthenticationContext";
 export default props => {
   const [totalRooms, setTotalRooms] = useState([]);
-
+  const {auth} = useContext(AuthenticationContext);
+  const axiosPrivate = useAxiosPrivate();
+  const navigate  = useNavigate();
   // User's selections
   const [selection, setSelection] = useState({
     room: {
@@ -29,10 +33,11 @@ export default props => {
 
   // User's booking details
   const [booking, setBooking] = useState({
-    name: "",
+    name: auth.firstName,
     // phone: "",
-    email: ""
+    email: auth.email
   });
+  const location = useLocation();
 
   // List of potential locations
   const [locations] = useState(["Any Location", "First Floor", "Second Floor", "Third Floor"]);
@@ -87,17 +92,14 @@ export default props => {
     // Check availability of rooms from DB when a date and time is selected
     if (selection.time && selection.date) {
       (async _ => {
+        try{
         let datetime = getDate();
-        let res = await fetch("http://localhost:3001/availability", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
+        let res = await axiosPrivate.post("availability",
+          {
             date: datetime
-          })
-        });
-        res = await res.json();
+          }
+        );
+        res = res.data;
         // Filter available rooms with location and group size criteria
         let rooms = res.rooms.filter(
           room =>
@@ -107,6 +109,10 @@ export default props => {
               : true)
         );
         setTotalRooms(rooms);
+      }catch(err){
+        console.log(err);
+        navigate("/authenticate/login" , { state : {from : location}, replace: true});
+      }
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -410,6 +416,7 @@ export default props => {
                 placeholder="Name"
                 className="reservation-input"
                 value={booking.name}
+                disabled
                 onChange={e => {
                   setBooking({
                     ...booking,
@@ -440,6 +447,7 @@ export default props => {
                 placeholder="Email"
                 className="reservation-input"
                 value={booking.email}
+                disabled
                 onChange={e => {
                   setBooking({
                     ...booking,

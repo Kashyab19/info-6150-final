@@ -94,6 +94,11 @@ const userDataSchema = new Schema({
     data: Buffer,
     contentType: String,
   },
+  birthDay : String,
+  location :String,
+  mobileNumber: Number,
+  homeNumber: String,
+  aboutMe:String
 });
 
 userDataSchema.pre("save", async function (next) {

@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.myBg {
-  background-image: url('../Images/bgImage.jpeg');
+
+.myBg{
+    background-image: url('../Images/bgImage.jpeg');
 }
 
 .mt-10 {

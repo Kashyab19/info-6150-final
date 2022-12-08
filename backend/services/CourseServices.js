@@ -11,7 +11,16 @@ exports.deleteAllCourses = async() => {
   return await CourseModelSchema.deleteMany();
 }
 
+exports.editUser = async (courseID, body) => {
+  return await CourseModelSchema.findOneAndUpdate({courseID: courseID}, body);
+}
+
 exports.getAllCourses = async() => {
   console.log("Inside get");
   return await CourseModelSchema.find();
+}
+
+exports.saveSelectedCourses = async(courseDet) => {
+  console.log("Data saved");
+  return await CourseModelSchema.create(courseDet);
 }

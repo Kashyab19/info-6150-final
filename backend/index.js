@@ -4,6 +4,7 @@ const app = express();
 const productRouter = require("./routes/ProductRoutes");
 const authenticationRoutes = require("./routes/AuthenticationRoutes");
 require('dotenv').config();
+const cookieParser =require('cookie-parser');
 
 const cors = require('cors');
 const corsOptions ={
@@ -15,11 +16,15 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.use(cookieParser());
  
 app.listen(3001, () => {
   console.log("Running your final project server in 3001");
 });
-
+// app.use(function(err,req,res,next) {
+//   res.status(500).send('Something broke!');
+// });
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb+srv://info-6150-final:info6150final@cluster0.jfxj8mz.mongodb.net/info-6150-final",
   {

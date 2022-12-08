@@ -4,7 +4,7 @@ import './css/App.css';
 import Time from './Time'
 import { Form, Button } from "react-bootstrap";
 //import  from "react-bootstrap/Button";
-import { UserContext } from '/Users/rushikeshdeore/Desktop/Fall22/INFO6150/FinalProject/info6150-project/frontend/src/App.js';
+import { UserContext } from '../../App.js'
 
 
 

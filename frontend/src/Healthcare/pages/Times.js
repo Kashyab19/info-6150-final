@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { UserContext } from '/Users/rushikeshdeore/Desktop/Fall22/INFO6150/FinalProject/info6150-project/frontend/src/App.js';
+import { UserContext } from '../../App.js'
 const time = ['08:00 |', '09:00 |', '10:00 |', '14:00 |', '15:00']
 
 function Times(props) {

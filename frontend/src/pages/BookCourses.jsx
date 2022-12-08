@@ -4,141 +4,147 @@ import Modal from 'react-bootstrap/Modal';
 
 import {Row, Col} from 'react-bootstrap';
 import "../styles/BookCourses.css"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import FileBase64 from 'react-file-base64';
+import { Link } from "react-router-dom";
 
 var isSelected = 'false';
+var prodCheck = 'false';
 var prog;
 const terms = ['Spring 2023', 'Fall 2024'];
 const programEnrolled = [{ code:"MIS", "name":'Information Systems'} ,{ code: "SES", "name": 'Software Engineering Systems'}, { code: "MEM", "name":'Engineering Management'}];
 
-const programs = {
-    "MIS": [
-        {
-            'Program': 'MIS',
-            'CourseID': 'INFO 5100',
-            'CourseName': 'Application Engineering and Design',
-            'Description': 'Design of Application and development using JAVA',
-            'Professor': 'Khaled Bugrara',
-            'MeetingTime': 'Wed 3pm - 6pm',
-            'Location': 'ISEC 102',
-            'Credits': '4',
-            'Contact': 'bugrara.k@northeastern.edu',
-            'Seats': '100'
-        },
-        {
-            'Program': 'MIS',
-            'CourseID': 'INFO 6100',
-            'CourseName': 'Web Design and Development',
-            'Description': 'Learn web development from HTML, CSS to MERN and MEAN stack',
-            'Professor': 'Vishal Chawla',
-            'MeetingTime': 'Thurs 6pm - 9:30pm',
-            'Location': 'Behrakis 203',
-            'Credits': '4',
-            'Contact': 'chawla.v@northeastern.edu',
-            'Seats': '100'
-        },
-        {
-            'Program': 'MIS',
-            'CourseID': 'INFO 6150',
-            'CourseName': 'Smartphone based application development',
-            'Description': 'Learn iOS application development',
-            'Professor': 'Rabah Ahmed',
-            'MeetingTime': 'Wed 3pm - 6pm',
-            'Location': 'ISEC 105',
-            'Credits': '4',
-            'Contact': 'ahmed.r@northeastern.edu',
-            'Seats': '100'
-        }
-    ],
-    "MEM": [
-        {
-            'Program': 'MEM',
-            'CourseID': 'INFO 5101',
-            'CourseName': 'Engineering Project Management',
-            'Description': 'Design of Application and development using JAVA',
-            'Professor': 'Khaled Bugrara',
-            'MeetingTime': 'Wed 3pm - 6pm',
-            'Location': 'ISEC 102',
-            'Credits': '4',
-            'Contact': 'bugrara.k@northeastern.edu',
-            'Seats': '100'
-        },
-        {
-            'Program': 'MEM',
-            'CourseID': 'INFO 6101',
-            'CourseName': 'Economic Decision Making',
-            'Description': 'Learn web development from HTML, CSS to MERN and MEAN stack',
-            'Professor': 'Vishal Chawla',
-            'MeetingTime': 'Thurs 6pm - 9:30pm',
-            'Location': 'Behrakis 203',
-            'Credits': '4',
-            'Contact': 'chawla.v@northeastern.edu',
-            'Seats': '100'
-        },
-        {
-            'Program': 'MEM',
-            'CourseID': 'INFO 6151',
-            'CourseName': 'Engineering Probability and Statistics',
-            'Description': 'Learn iOS application development',
-            'Professor': 'Rabah Ahmed',
-            'MeetingTime': 'Wed 3pm - 6pm',
-            'Location': 'ISEC 105',
-            'Credits': '4',
-            'Contact': 'ahmed.r@northeastern.edu',
-            'Seats': '100'
-        }
-    ],
-    "SES": [
-        {
-            'Program': 'SES',
-            'CourseID': 'INFO 5102',
-            'CourseName': 'Concepts of Object-Oriented Design',
-            'Description': 'Design of Application and development using JAVA',
-            'Professor': 'Khaled Bugrara',
-            'MeetingTime': 'Wed 3pm - 6pm',
-            'Location': 'ISEC 102',
-            'Credits': '4',
-            'Contact': 'bugrara.k@northeastern.edu',
-            'Seats': '100'
-        },
-        {
-            'Program': 'SES',
-            'CourseID': 'INFO 6102',
-            'CourseName': 'Program Structure and Algorithms',
-            'Description': 'Learn web development from HTML, CSS to MERN and MEAN stack',
-            'Professor': 'Vishal Chawla',
-            'MeetingTime': 'Thurs 6pm - 9:30pm',
-            'Location': 'Behrakis 203',
-            'Credits': '4',
-            'Contact': 'chawla.v@northeastern.edu',
-            'Seats': '100'
-        },
-        {
-            'Program': 'SES',
-            'CourseID': 'INFO 6152',
-            'CourseName': 'User Experience Design and Testing',
-            'Description': 'Learn iOS application development',
-            'Professor': 'Rabah Ahmed',
-            'MeetingTime': 'Wed 3pm - 6pm',
-            'Location': 'ISEC 105',
-            'Credits': '4',
-            'Contact': 'ahmed.r@northeastern.edu',
-            'Seats': '100'
-        }
-    ]
-}
+const programDet = []
+const selectedCourses = []
+// const programs = {
+//     "MIS": [
+//         {
+//             'Program': 'MIS',
+//             'CourseID': 'INFO 5100',
+//             'CourseName': 'Application Engineering and Design',
+//             'Description': 'Design of Application and development using JAVA',
+//             'Professor': 'Khaled Bugrara',
+//             'MeetingTime': 'Wed 3pm - 6pm',
+//             'Location': 'ISEC 102',
+//             'Credits': '4',
+//             'Contact': 'bugrara.k@northeastern.edu',
+//             'Seats': '100'
+//         },
+//         {
+//             'Program': 'MIS',
+//             'CourseID': 'INFO 6100',
+//             'CourseName': 'Web Design and Development',
+//             'Description': 'Learn web development from HTML, CSS to MERN and MEAN stack',
+//             'Professor': 'Vishal Chawla',
+//             'MeetingTime': 'Thurs 6pm - 9:30pm',
+//             'Location': 'Behrakis 203',
+//             'Credits': '4',
+//             'Contact': 'chawla.v@northeastern.edu',
+//             'Seats': '100'
+//         },
+//         {
+//             'Program': 'MIS',
+//             'CourseID': 'INFO 6150',
+//             'CourseName': 'Smartphone based application development',
+//             'Description': 'Learn iOS application development',
+//             'Professor': 'Rabah Ahmed',
+//             'MeetingTime': 'Wed 3pm - 6pm',
+//             'Location': 'ISEC 105',
+//             'Credits': '4',
+//             'Contact': 'ahmed.r@northeastern.edu',
+//             'Seats': '100'
+//         }
+//     ],
+//     "MEM": [
+//         {
+//             'Program': 'MEM',
+//             'CourseID': 'INFO 5101',
+//             'CourseName': 'Engineering Project Management',
+//             'Description': 'Design of Application and development using JAVA',
+//             'Professor': 'Khaled Bugrara',
+//             'MeetingTime': 'Wed 3pm - 6pm',
+//             'Location': 'ISEC 102',
+//             'Credits': '4',
+//             'Contact': 'bugrara.k@northeastern.edu',
+//             'Seats': '100'
+//         },
+//         {
+//             'Program': 'MEM',
+//             'CourseID': 'INFO 6101',
+//             'CourseName': 'Economic Decision Making',
+//             'Description': 'Learn web development from HTML, CSS to MERN and MEAN stack',
+//             'Professor': 'Vishal Chawla',
+//             'MeetingTime': 'Thurs 6pm - 9:30pm',
+//             'Location': 'Behrakis 203',
+//             'Credits': '4',
+//             'Contact': 'chawla.v@northeastern.edu',
+//             'Seats': '100'
+//         },
+//         {
+//             'Program': 'MEM',
+//             'CourseID': 'INFO 6151',
+//             'CourseName': 'Engineering Probability and Statistics',
+//             'Description': 'Learn iOS application development',
+//             'Professor': 'Rabah Ahmed',
+//             'MeetingTime': 'Wed 3pm - 6pm',
+//             'Location': 'ISEC 105',
+//             'Credits': '4',
+//             'Contact': 'ahmed.r@northeastern.edu',
+//             'Seats': '100'
+//         }
+//     ],
+//     "SES": [
+//         {
+//             'Program': 'SES',
+//             'CourseID': 'INFO 5102',
+//             'CourseName': 'Concepts of Object-Oriented Design',
+//             'Description': 'Design of Application and development using JAVA',
+//             'Professor': 'Khaled Bugrara',
+//             'MeetingTime': 'Wed 3pm - 6pm',
+//             'Location': 'ISEC 102',
+//             'Credits': '4',
+//             'Contact': 'bugrara.k@northeastern.edu',
+//             'Seats': '100'
+//         },
+//         {
+//             'Program': 'SES',
+//             'CourseID': 'INFO 6102',
+//             'CourseName': 'Program Structure and Algorithms',
+//             'Description': 'Learn web development from HTML, CSS to MERN and MEAN stack',
+//             'Professor': 'Vishal Chawla',
+//             'MeetingTime': 'Thurs 6pm - 9:30pm',
+//             'Location': 'Behrakis 203',
+//             'Credits': '4',
+//             'Contact': 'chawla.v@northeastern.edu',
+//             'Seats': '100'
+//         },
+//         {
+//             'Program': 'SES',
+//             'CourseID': 'INFO 6152',
+//             'CourseName': 'User Experience Design and Testing',
+//             'Description': 'Learn iOS application development',
+//             'Professor': 'Rabah Ahmed',
+//             'MeetingTime': 'Wed 3pm - 6pm',
+//             'Location': 'ISEC 105',
+//             'Credits': '4',
+//             'Contact': 'ahmed.r@northeastern.edu',
+//             'Seats': '100'
+//         }
+//     ]
+// }
 
 const BookCourses = () =>{
+    
+    const [courses, setCourses] = useState([])
     const [showResults, setShowResults] = useState(false);
     const [checked, setChecked] = useState({});
     const showDetails = (e) => {
         setShowResults(true);
-        console.log(e);
+        console.log(e)
     }
-const handleCheckBoxChange = (e) => {
+    const handleCheckBoxChange = (e) => {
         let newState = {...checked};
+        console.log(newState)
 
         if(newState[e]){
             newState[e] = !newState[e]
@@ -146,15 +152,23 @@ const handleCheckBoxChange = (e) => {
             newState[e] = true
         }
         setChecked(newState);
+        // console.log(checked)
+        // setNewProduct(
+        //     {
+        //         ...newProduct,
+        //         details: {
+        //             ...newProduct.details,
+        //             [e.target.name] : e.target.value
+        //         },
+                
+        //         [e.target.name] : e.target.value, //For root-level elements
+        //     }
+        // );
         setNewProduct(
             {
-                ...newProduct,
-                details: {
-                    ...newProduct.details,
-                    [e.target.name] : e.target.value
-                },
+                // ...newProduct,
+                // [e.target.name] : e.target.value, //For root-level elements
                 
-                [e.target.name] : e.target.value, //For root-level elements
             }
         );
     }
@@ -168,34 +182,45 @@ const handleCheckBoxChange = (e) => {
     const [flags, setFlags] = useState({
         showModal : false
     })
+    //const [selectedCourses, setSelectedCourses] = useState({});
     const [newProduct, setNewProduct] = useState( {
+        program: "",
         courseID : "",
         courseName: "",
-        program: "",
-        details:{
-            term: "",
-            description: "",
-            professor: "",
-            meetingTime: "",
-            location: "",
-            credits: "",
-            contact: "",
-            seats: ""
-        }
+        term: "",
+        description: "",
+        professor: "",
+        meetingTime: "",
+        location: "",
+        credits: "",
+        contact: ""
     });
     
     const handleSubmit =(e) => {
-        let checkedCourses = Object.keys(checked).filter((key) => checked[key])
-        console.log(checkedCourses);
+        //let checkedCourses = Object.keys(checked).filter((key) => checked[key])
         
         e.preventDefault();
         setChecked({});
         
-        console.log("At Handle Submit");
+        console.log(checked)
+
+        const temp = Object.keys(checked);
+
+        for(let i=0;i<temp.length;i++)
+        {
+            for(let j=0;j<programDet.length;j++)
+                if(temp[i] === programDet[j].props.CourseID)
+                {
+                    selectedCourses.push(<option Program = {programDet[j].props.Program} CourseID = {programDet[j].props.CourseID} 
+                        CourseName = {programDet[j].props.CourseName} Professor = {programDet[j].props.Professor} 
+                        MeetingTime = {programDet[j].props.MeetingTime} Location = {programDet[j].props.Location} 
+                        Contact = {programDet[j].props.Contact} key = {programDet[j].props.Program}>{i}</option>)
+                }
+        }
 
         var productAdded = newProduct;
         alert("Your courses have been saved")
-        // axios.post("http://127.0.0.1:3001/api/products/book-course", productAdded)
+        // axios.post("http://127.0.0.1:3001/api/course/saved-courses", productAdded)
         //     .then(response =>{
         //         console.log(response);
         //     })
@@ -203,25 +228,21 @@ const handleCheckBoxChange = (e) => {
         //     setFlags({
         //         showModal: true
         //     })
-        // setNewProduct({
-        // courseID : "",
-        // courseName: "",
-        // program: "",
-        // details:{
-        //     term: "",
-        //     description: "",
-        //     professor: "",
-        //     meetingTime: "",
-        //     location: "",
-        //     credits: "",
-        //     contact: "",
-        //     seats: ""
-        // }
-        // })
+        setNewProduct({
+            program: "",
+            courseID : "",
+            courseName: "",
+            term: "",
+            description: "",
+            professor: "",
+            meetingTime: "",
+            location: "",
+            credits: "",
+            contact: "",
+        })
 
-
-
-        console.log(newProduct);
+        console.log(newProduct)
+        console.log(selectedCourses)
     }
     const handleModal = (e) => {
         e.preventDefault();
@@ -233,19 +254,41 @@ const handleCheckBoxChange = (e) => {
         setNewProduct(
             {
                 ...newProduct,
-                details: {
-                    ...newProduct.details,
-                    [e.target.name] : e.target.value
-                },
-                
                 [e.target.name] : e.target.value, //For root-level elements
             }
         );
         
     }
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/api/course/get-all-courses").then(res => {
+            setCourses(res.data.data)
+            console.log(res.data)
+            return res.data
+    })}, []
+    )
+    //{console.log(courses)}
+
+    for (let i=0;i<courses.length;i++)
+    {
+        console.log(programDet.length)
+        console.log(courses.length)
+        if(programDet.length < courses.length)
+            {   programDet.push(<option Program = {courses[i].program} CourseID = {courses[i].courseID} 
+                              CourseName = {courses[i].courseName} Description = {courses[i].description} 
+                              Professor = {courses[i].professor} MeetingTime = {courses[i].meetingTime} 
+                              Location = {courses[i].location} Credits = {courses[i].credits} Contact = {courses[i].contact}
+                              Seats = {courses[i].seats} key = {courses[i].program}>{i}</option>)
+            }
+        else
+            break;
+    }
+
+    {console.log(programDet)}
+
     const handleProgramChange = (e) => {
         e.preventDefault();
-        console.log(e.target);
+        console.log(e.target)
         if(e.target.value === 'MIS'){
             prog = 'Information Systems';
         }
@@ -259,12 +302,12 @@ const handleCheckBoxChange = (e) => {
         setNewProduct(
             {
                 ...newProduct,
-                details: {
-                    ...newProduct.details,
-                    [e.target.name] : prog
-                },
+                // details: {
+                //     ...newProduct.details,
+                //     [e.target.name] : prog
+                // },
 
-                [e.target.name] : prog, //For root-level elements
+                [e.target.name] : e.target.value, //For root-level elements
                 
             },
             console.log(prog)
@@ -272,25 +315,20 @@ const handleCheckBoxChange = (e) => {
         
     }
 
-    // if (selected === "Information Systems") {
-    //     type = MIS;
-    //     isSelected = true;
-    //   } else if (selected === "Software Engineering Systems") {
-    //     type = SES;
-    //     isSelected = true;
-    //   } else if (selected === "Engineering Management") {
-    //     type = MEM;
-    //     isSelected = true;
-    //   }
-
-    // if (type) {
-    // options = 
-    // }
-
     return(
+        <div className='' >
         <div className="add-product-container ">
             <Form onSubmit={handleSubmit} autoComplete="off" validate = "true" encType='multipart/form-data' >
-                <h4> Course List </h4>
+                <ul >
+                    <li className='.form-head'><h4 > Course List </h4></li>
+                    <li>
+                    <Link className='viewSelected' to= '/view-course' state = {{ from: selectedCourses}}>
+                        {console.log(selectedCourses)}
+                         View my Courses 
+                    </Link>
+                    </li>
+                    
+                </ul>
                 {/* <Form.Group className="mb-3" controlId="formBasicEmail" required>
                     <Form.Control type="text" placeholder="Product Name*" name="productName" value={newProduct.productName} onChange={handleChange}/>
                 </Form.Group>
@@ -308,13 +346,15 @@ const handleCheckBoxChange = (e) => {
                     </Col>
                 </Row>
                 <br/> */}
+                {/* <GetAllCourses/> */}
+
                 <Row>
                     {/* <Col>
                         <Form.Control placeholder="City*" name="city" value={newProduct.location.city} onChange={handleChange}/>
                     </Col> */}
                     <Col>
                         <Form.Group as={Col} controlId="formGridState">
-                            <Form.Select name="term" value={newProduct.details.term}  onChange={handleChange}>
+                            <Form.Select name="term" value={newProduct.term}  onChange={handleChange}>
                                 <option>Select a Term*</option>
                                 {
                                     terms?.map(
@@ -338,7 +378,8 @@ const handleCheckBoxChange = (e) => {
                                 <Form.Select defaultValue="None" name="program" value={newProduct.program} onChange={handleProgramChange}>
                                     <option>Program Enrolled In*</option>
                                     {
-                                        programEnrolled.map((program) => {
+                                        programEnrolled?.map(
+                                            program => {
                                                 return(
                                                     <option key={program.code} value ={program.code}>
                                                         {program.name}
@@ -356,33 +397,37 @@ const handleCheckBoxChange = (e) => {
                     <Col>
                         <Form.Group>
                              {
-                              selected && programs[selected].map((program) => 
+                              selected && programDet.map((program) => {
+                              if (selected === program.key) {
+                                return (
                                 <div className="form-check">
                                     <label className='form-comp'>
+                                        {console.log(checked[program.props.CourseID])}
                                     <div className='course-check-box'>
                                         <input
                                         type="checkbox"
-                                        checked={checked[program.CourseID]}
-                                        onChange={() => handleCheckBoxChange(program.CourseID)}
+                                        checked={checked[program.props.CourseID]}
+                                        onChange={() => handleCheckBoxChange(program.props.CourseID)}
                                         />
                                     </div>
                                         <div className='course-summary'>
-                                            <details>
-                                            <summary><b>{program.CourseName}</b></summary>
-                                               <ul><b>{'CourseID:'}</b> {program.CourseID}</ul>
-                                               <ul><b>{'Description:'}</b> {program.Description}</ul>
-                                               <ul><b>{'Professor:'}</b> {program.Professor}</ul>
-                                               <ul><b>{'MeetingTime:'}</b> {program.MeetingTime}</ul>
-                                               <ul><b>{'Location:'}</b> {program.Location}</ul>
-                                               <ul><b>{'Credits:'}</b> {program.Credits}</ul>
-                                               <ul><b>{'Contact:'}</b> {program.Contact}</ul>
-                                               <ul><b>{'Seats Remaining:'}</b> {program.Seats}</ul>
-                                            </details>
+                                            <details>    
+                                            <summary><b>{program.props.CourseName}</b></summary>
+                                            <ul><b>{'CourseID:'}</b> {program.props.CourseID}</ul>
+                                            <ul><b>{'Description:'}</b> {program.props.Description}</ul>
+                                            <ul><b>{'Professor:'}</b> {program.props.Professor}</ul>
+                                            <ul><b>{'MeetingTime:'}</b> {program.props.MeetingTime}</ul>
+                                            <ul><b>{'Location:'}</b> {program.props.Location}</ul>
+                                            <ul><b>{'Credits:'}</b> {program.props.Credits}</ul>
+                                            <ul><b>{'Contact:'}</b> {program.props.Contact}</ul>
+                                            <ul><b>{'Seats Remaining:'}</b> {program.props.Seats}</ul>
+                                            </details> 
                                         </div>
-                                        {/* <Button className='buttons' variant="primary" onClick={showDetails}>Expand</Button>
-                                        { showResults ? program.Description : null } */}
                                     </label>
                                 </div>
+                                )
+                              }
+                            }
                                 )
                              }
                         </Form.Group>
@@ -430,18 +475,19 @@ const handleCheckBoxChange = (e) => {
                 </div>
 
                 <div className='d-flex justify-content-center'>
-                    <Button className='' variant="primary" type="submit"> Submit </Button>
+                    <Button className='submitButton' variant="danger" type="submit"> Submit </Button>
                 </div>   
         </Form>
 
-                            <Modal open={flags.showModal}>
-                                <Modal.Dialog>
-                                <Modal.Header closeButton>
-                                <Modal.Title>Modal title</Modal.Title>
-                                </Modal.Header>
-                                 </Modal.Dialog>
-                            </Modal>
+        <Modal open={flags.showModal}>
+            <Modal.Dialog>
+            <Modal.Header closeButton>
+            <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+                </Modal.Dialog>
+        </Modal>
        
+    </div>
     </div>
     )
 }

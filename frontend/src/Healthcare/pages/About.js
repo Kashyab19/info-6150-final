@@ -1,19 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 //import img from './Images/bgImage.jpeg';
 import { Card } from 'react-bootstrap';
 import "./css/StylesCommon.css";
 import { MdArrowRightAlt } from "react-icons/md";
 import '../pages/css/aboutUs.css'
+import AuthenticationContext from '../../context/AuthenticationContext';
 
 
 
 
-function about() {
+function About() {
+  const {auth} = useContext(AuthenticationContext);
   return (
+
     <div className='mainDiv mainDivAbout'>
+
+
       {/*     <h1 className="myHome">Welcome {email}</h1>
             <h1 className="myHome">Welcome User</h1>
  */}
+
       <Card >
         <div className="banner myBg">
           <div className="w-9/12 mx-auto grid py-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
@@ -32,9 +38,9 @@ function about() {
               </button>
             </div>
           </div>
+
         </div>
-        {/*          <Card.Img variant="top" className="myImg" src={img} />
- */}        <Card.Body className='myCardBody'>
+     <Card.Body className='myCardBody'>
           <Card.Title className="myHome">Welcome to NUSHP</Card.Title>
           <Card.Subtitle className="mb-2 text-muted, myHomeSubtitle">Mandatory Health Coverage</Card.Subtitle>
           <Card.Text className="myHomeText">
@@ -59,4 +65,4 @@ function about() {
 
 }
 
-export default about
+export default About

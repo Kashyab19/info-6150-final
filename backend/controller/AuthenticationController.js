@@ -5,10 +5,15 @@ exports.login = async (req, res) => {
     .login(req.body)
     .then((data) => {
       res.status(200);
+      res.cookie('jwt', data.refreshToken,{httpOnly: true , maxAge: 24 * 60 * 60 *1000 })
       res.json({
         status: "SUCCESS",
         message: "LOGGED_IN_SUCCESSFULLY",
-        data: data,
+        data:  {
+          accessToken : data.accessToken,
+          date: data.date,
+          firstName: data.firstName
+        }
       });
     })
     .catch((err) => {
@@ -66,8 +71,19 @@ exports.passwordReset = (req, res) => {
   return authenicateService.passwordReset({...req.body}, res);
 };
 
+exports.deleteToken = (req, res) => {
+  return authenicateService.deleteToken(req, res);
+};
 
 exports.updateProfile = (req, res) => {
   return authenicateService.updateProfile(req, res);
 };
+
+exports.getProfile = (req,res)=> {
+  return authenicateService.getProfile(req.query.email, res);
+}
+
+exports.saveFeedBack = (req,res)=> {
+  return authenicateService.saveFeeedback(req, res);
+}
 

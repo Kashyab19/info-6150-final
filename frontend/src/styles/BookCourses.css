@@ -1,24 +1,75 @@
-.form-check .form-comp {
+/* .test1 {
+    background: url("../background.jpeg") repeat-x center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+} */
+
+.add-product-container ul {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+  }
+  .add-product-container ul li {
+    display: flex;
+    margin: 1px;
+    padding: 5px;
+    color:black; 
+    text-decoration: none;
+    text-align: center;
+  }
+.add-product-container ul li:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+.add-product-container .viewSelected {
+    color:black;
+    text-decoration: none;
+}
+
+.add-product-container {
+    background-color: whitesmoke;
+    /* width: 8em; */
+    
+}
+.add-product-container .form-head {
+    
+    text-align: center;
+}
+
+.add-product-container .form-check .form-comp {
     margin-right: 100px !important
 }
 
-.form-check .buttons {
+.add-product-container .form-check .buttons {
     margin-left: 50px !important;
     margin-right: 1 0px !important
 }
 
-.course-check-box  {
+.add-product-container .course-check-box  {
     margin-right: 10px;
 }
 
-.form-comp {
+.add-product-container .form-comp {
     display: flex;
 }
 
-details > summary {
+.add-product-container details > summary {
     list-style: none;
   }
 
-details summary::-webkit-details-marker {
+.add-product-container details summary::-webkit-details-marker {
     display:none;
   }
+
+  .add-product-container .submitButton {
+    background-color: rgb(231, 37, 37);
+}
