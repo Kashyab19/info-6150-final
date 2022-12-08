@@ -27,9 +27,9 @@
   cursor: grab;
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1000px) {
   .mainDivPolDet {
-    height: 640px;
+    height: 1000px;
   }
 
   .policyImage {
@@ -337,9 +337,9 @@ button:hover {
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1000px) {
   .mainDivCheckups {
-    height: 1150px;
+    height: auto;
   }
 
   .paraContent {

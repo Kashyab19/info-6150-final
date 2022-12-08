@@ -82,7 +82,7 @@ function Contact() {
         </Form.Group>
         <Form.Group size="lg">
           <Form.Label className="helpTopic">Pick Topic</Form.Label><br></br>
-          <label>
+          <label >
             <select id="helpTopic">
               <option value="Login">Login Assitance</option>
               <option value="Waiver">Waiver Assistance</option>

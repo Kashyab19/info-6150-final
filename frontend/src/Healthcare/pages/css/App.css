@@ -1,4 +1,4 @@
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1000px) {
   .react-calendar {
     width: 350px;
 /*     max-width: 100%;
@@ -20,7 +20,7 @@
   
   }
   
-  buttonAppointment:hover {
+  .buttonAppointment:hover {
     opacity: 0.8;
   }
 }
@@ -192,7 +192,7 @@
   width: 130%;
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1000px) {
   .myTextColor {
     color: white;
     font-size: large;

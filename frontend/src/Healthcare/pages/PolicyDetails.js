@@ -133,10 +133,10 @@ function PolicyDetails() {
         <div>
           <div className='mySection1'>
             <h3 className='headerStyle'>Plan Summary</h3>
-            <h1 className='header1Section1'>Carrier Name: Blue Cross Blue Shield of Massachusetts</h1>
+            <h1 className='header1Section1' style={{ fontSize : 'inherit' , fontWeight : 'inherit' ,margin: 0}}>Carrier Name: Blue Cross Blue Shield of Massachusetts</h1>
             <p>Enroll in or Waive the 2022-2023 Northeastern University Student Health Insurance Plan before the posted deadline.</p><br></br>
             <div className='borderLine'></div><br></br>
-            <h1>2022-2023 Annual Coverage Period: 09/01/2022 - 08/31/2023</h1>
+            <h1 style={{ fontSize : 'inherit',fontWeight : 'inherit',margin:0}}>2022-2023 Annual Coverage Period: 09/01/2022 - 08/31/2023</h1>
             <p>Waiver Period: 07/18/2022 - 11/23/2022</p>
             <br></br>
             <marquee className='myMarquee'>Please contact UHCS if you seem to find any discrepancy in the information provided.</marquee>
