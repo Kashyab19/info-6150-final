@@ -47,9 +47,6 @@ const ProfilePage = () => {
     }
   };
   const location = useLocation();
-  useEffect(() => {
-    console.log(location);
-  });
   return (
     <div ref={navRef}>
       {navbarActive ? (
@@ -142,7 +139,7 @@ const ProfilePage = () => {
       </header>
       <div className="mt-5">
         <Routes>
-          <Route path="/profile" element={<ProfileComponent />} />
+          <Route path="/*" element={<ProfileComponent />} />
           <Route path="/library" element={<LibraryBooking />} />
           <Route path="/redEye" element={<RedEye />} />
           <Route path="/add-products" element={<AddProducts />} />

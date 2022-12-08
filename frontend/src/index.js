@@ -30,7 +30,6 @@ root.render(
       <Routes>
         <Route exact={true} path="/*" element={<App />} />
         <Route exact={true} path="/profile" element={<ProfilePage />} />
-
         <Route exact={true} path="/authenticate/*" element={<Login/>} />
         <Route exact={true} path="/signup" element={<Register/>} />
         <Route exact={true} path="/verify" element={<Verification/>} />
