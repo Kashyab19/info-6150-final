@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "question": "Enroll",
+        "answer": "Eligible students will be automatically enrolled in and billed for NUSHP once they register for classes as a full or part time student and meet the minimum qualifications. Online students and students in a non-degree program are not eligible for NUSHP. Students on Co-op or Study Abroad are considered active students and will be enrolled in and billed for NUSHP each year."
+    },
+    {
+        "id": 2,
+        "question": "Obtain an ID card",
+        "answer": "ID cards are available online through the MyBlue app available in the App Store or Google Play. You’ll need your BCBS ID number (not your Social Security number) to create your account. Your BCBS ID number is available by going to the Account Home section of our website."
+    },
+    {
+        "id": 3,
+        "question": "Obtain a tax form",
+        "answer": "If the federal government requires reporting of health insurance coverage for 2021, tax forms will be mailed to the address on file by either the Insurance Carrier or the Claims Administrator. Please refer to the Important Contact Information Section of this document for further information."
+    },
+    {
+        "id": 4,
+        "question": "Change my address",
+        "answer": "Please contact your school to update your address."
+    },
+    {
+        "id": 5,
+        "question": "If I waive, but then lose coverage, can I enroll in NUSHP?",
+        "answer": "Yes, students who waive NUSHP, and then lose their insurance plan, may submit a Petition to Add form. The form can be found on my Northeastern, choose NUSHP, choose the ‘Petition to Add’ link on the left side of the page. Make sure you read the form carefully as it contains very specific information on the Petition to Add process."
+    },
+    {
+        "id": 5,
+        "question": "Questions about tax forms",
+        "answer": "Address: 101 Huntington Avenue, Suite 1300 Boston, MA 02199-7611 Phone: 1-888-648-0825 Website: http://www.studentbluema.com/home.php"
+    },
+    {
+        "id": 5,
+        "question": "Additional Health Plan Questions",
+        "answer": "NUSHP Office, Email: NUSHP@northeastern.edu"
+    },
+    {
+        "id": 5,
+        "question": "What do you mean by “comparable coverage”?",
+        "answer": "If your current plan is an HMO, your coverage will likely be limited—or not available—outside of your HMO’s service area. As a result, it probably won’t be considered a “comparable” plan."
+    },
+    {
+        "id": 5,
+        "question": "What should I know before waiving coverage?",
+        "answer": "Before waiving coverage, review your current policy and then consider these questions: • Does your plan comply with the ACA? (See the FAQ, “What do you mean by 'comparable coverage'?”)• Will your current plan cover medical care beyond emergency services (i.e. doctor's office visits, diagnostic testing, x-rays, prescription drugs, mental health, etc.) on- and off-campus?"
+    }
+]
