@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const multer  = require('multer')
 const productsSchema = new Schema({
+    productOwner: String,
     productName : String,
     productPrice: String,
     location:{
@@ -14,7 +15,8 @@ const productsSchema = new Schema({
     details:{
         productCondition: String,
         productMaterial: String,
-        colour: String
+        colour: String,
+        firstPhoto: String
     }
 });
  

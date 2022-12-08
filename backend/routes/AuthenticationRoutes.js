@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { signup,login,testFUnction,sessionCheck,refreshToken,verifyCode,forgotPassword,passwordReset } = require("../controller/AuthenticationController");
+const { signup,login,testFUnction,sessionCheck,refreshToken,verifyCode,forgotPassword,passwordReset, updateProfile } = require("../controller/AuthenticationController");
 
 const router = express.Router();
 
@@ -15,6 +15,8 @@ router.route("/verifyCode").post(verifyCode);
 router.route("/forgotPassword").get(forgotPassword);
 
 router.route("/passwordReset").post(passwordReset);
+
+router.post("/updateProfile",updateProfile);
 
 
 router.get('/test',sessionCheck,testFUnction);

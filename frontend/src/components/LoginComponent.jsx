@@ -53,8 +53,9 @@ const LoginComponent = () => {
           withCredentials: true,
         }
       );
-      const accessToken = response?.data?.token;
-      navigate("/");
+      const accessToken = response?.data?.data.accessToken;
+      setAuth({accessToken,email, "firstName" : response?.data?.data?.firstName})
+      navigate("/profile");
       setEmail("");
       setPassword("");
     } catch (err) {

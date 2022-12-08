@@ -78,6 +78,19 @@
     display: none;
     color: #fff;
   }
+  /* .scrollspy-section-wrapper{
+    margin-left: 26.5rem;
+  } */
+
+}
+
+@media (max-width: 992px) {
+  .scrollSpyUl{
+    display: none !important;
+  }
+  /* .scrollspy-section-wrapper{
+    margin-left: 0px;
+  } */
 }
 
 .nav-menu a:hover,
@@ -118,7 +131,7 @@
   outline: none !important;
   line-height: 0;
   cursor: pointer;
-  border-radius: 50px;
+  border-radius: 25px;
   padding: 5px;
 }
 
@@ -137,4 +150,12 @@
 .mobile-nav-active .mobile-nav-toggle {
   color: #fff;
   background-color: #D41B2C;
+}
+
+#avathar{
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+  background-image: url('../../public/northeastern.webp');
+  background-size: "sight";
 }
