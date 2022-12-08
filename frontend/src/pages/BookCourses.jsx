@@ -316,6 +316,7 @@ const BookCourses = () =>{
     }
 
     return(
+        <div className='' >
         <div className="add-product-container ">
             <Form onSubmit={handleSubmit} autoComplete="off" validate = "true" encType='multipart/form-data' >
                 <ul >
@@ -486,6 +487,7 @@ const BookCourses = () =>{
                 </Modal.Dialog>
         </Modal>
        
+    </div>
     </div>
     )
 }

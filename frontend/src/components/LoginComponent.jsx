@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useContext } from "react";
 import axios from "../api/axios";
 import AuthenticationContext from "../context/AuthenticationContext";
-import { useNavigate,Link, useLocation } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 const LOGIN_URL = "api/login";
 const FORGOT_PASSWORD_URL = "api/forgotPassword";
@@ -12,16 +12,29 @@ const PASSWORD_REGEX =
 const LoginComponent = () => {
   const emailRef = useRef();
   const errRef = useRef();
-  const { setAuth } = useContext(AuthenticationContext);
+  const { setAuth, auth,persist,setPersist } = useContext(AuthenticationContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const navigate = useNavigate();
-  const location  =  useLocation();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/home/profile";
   useEffect(() => {
-    if(location?.state?.location === '/authenticate/resetPassword'){
+    if (location?.state?.location === "/authenticate/resetPassword") {
       setSuccessMsg("Password reset successful, Please login to continue");
+    }
+    console.log(location?.state);
+    if (location?.state?.from == "logout") {
+      console.log(location?.state);
+      axios.get(
+        "/api/deleteToken",
+        { params: { email: auth.email } },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      ).then(() => {setAuth({})})
     }
     emailRef.current.focus();
   }, []);
@@ -35,7 +48,7 @@ const LoginComponent = () => {
     e.preventDefault();
     let v1 = EMAIL_REGEX.test(email);
     let v2 = PASSWORD_REGEX.test(password);
-    if(!v1 || !v2 ){
+    if (!v1 || !v2) {
       setErrMsg(
         "Incorrect email or password, please check the details and try once again"
       );
@@ -54,10 +67,15 @@ const LoginComponent = () => {
         }
       );
       const accessToken = response?.data?.data.accessToken;
-      setAuth({accessToken,email, "firstName" : response?.data?.data?.firstName})
-      navigate("/profile");
+      setAuth({
+        accessToken,
+        email,
+        firstName: response?.data?.data?.firstName,
+      });
+
       setEmail("");
       setPassword("");
+      navigate(from, { replace: true });
     } catch (err) {
       let responseJSON = err?.response?.data;
       if (responseJSON?.message === "PASSWORD_INCORRECT") {
@@ -69,8 +87,10 @@ const LoginComponent = () => {
           "Account doesnot exist with the email ID provided , please create account to continue"
         );
       } else if (responseJSON?.message === "PLEASE_VERIFY_EMAIL_TO_PROCEED") {
-        setAuth({email})
-        navigate("/authenticate/verify", {state :{"location" : location.pathname}});
+        setAuth({ email });
+        navigate("/authenticate/verify", {
+          state: { location: location.pathname },
+        });
       } else {
         setErrMsg("No server response");
       }
@@ -78,28 +98,37 @@ const LoginComponent = () => {
     }
   };
   const forgotPassword = async () => {
-    let v1 = EMAIL_REGEX.test(email)
-    if(!v1){
-      setErrMsg("Please enter valid email, a verification code will be sent to your email to reset the password")
+    let v1 = EMAIL_REGEX.test(email);
+    if (!v1) {
+      setErrMsg(
+        "Please enter valid email, a verification code will be sent to your email to reset the password"
+      );
       return;
     }
 
     const response = await axios.get(
-      FORGOT_PASSWORD_URL,{ params: { email } },
+      FORGOT_PASSWORD_URL,
+      { params: { email } },
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       }
     );
     console.log(response?.data);
-    if(response?.data?.status === 'SUCCESS'){
-      setAuth({email});
+    if (response?.data?.status === "SUCCESS") {
+      setAuth({ email });
       navigate("/authenticate/resetPassword");
-    }else{
-      setErrMsg("No server response, please try again after some time")
+    } else {
+      setErrMsg("No server response, please try again after some time");
     }
+  };
+  const tooglePersist =()=>{
+    setPersist(prev => !prev);
+  };
 
-  }
+  useEffect(() => {
+    localStorage.setItem("persist" ,persist);
+  })
   return (
     <>
       <form style={{ width: "23rem" }} className="needs-validation">
@@ -152,20 +181,36 @@ const LoginComponent = () => {
             label="Enter"
           />
         </div>
-
+        <div className="pt-1">
+          <input type="checkbox"
+          id = "persist"
+          onChange={tooglePersist}
+          className = "px-2"
+          checked = {persist}>
+          </input>
+          <label htmlFor="persist">  Trust this device</label>
+        </div>
         <div className="pt-1 mb-4 text-center">
           <button
             className="btn btn-danger btn-lg btn-block"
             type="button"
             onClick={handleSubmit}
-            disabled = { EMAIL_REGEX.test(email) && PASSWORD_REGEX.test(password) ? false : true}
+            disabled={
+              EMAIL_REGEX.test(email) && PASSWORD_REGEX.test(password)
+                ? false
+                : true
+            }
           >
             Login
           </button>
         </div>
 
         <p className="small mb-5 pb-lg-2">
-          <a className="text-muted" onClick={forgotPassword} style = {{cursor : "pointer"}}>
+          <a
+            className="text-muted"
+            onClick={forgotPassword}
+            style={{ cursor: "pointer" }}
+          >
             Forgot password?
           </a>
         </p>

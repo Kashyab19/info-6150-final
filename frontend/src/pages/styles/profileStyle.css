@@ -1,0 +1,38 @@
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+.p-3 {
+    padding: 1rem !important;
+}
+.flex-shrink-0 {
+    flex-shrink: 0 !important;
+}
+.flex-column {
+    flex-direction: column !important;
+}
+.d-flex {
+    display: flex !important;
+}
+.full-ht {
+    min-height: 100vh;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+.rounded {
+    width: 50% !important;
+}
+.active {
+    padding-left: 3.5vh !important;
+}
+#formFile {
+    margin-top: 2vh;
+}
+@media only screen and (max-width:767px) {
+    .full-ht {
+        width: 100% !important;
+    }
+    * {
+        font-size: xx-large;
+    }
+}

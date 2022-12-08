@@ -14,11 +14,13 @@ import {
   faEnvelope,
   faMobile,
   faHouseUser,
-  faQuoteLeft
+  faQuoteLeft,
+  faDiagramProject,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../api/axios";
-
+import useAxiosPrivate from "../context/useAxiosPrivate";
+import { useLocation, useNavigate } from "react-router-dom";
 const SIZE = 5;
 const list = new Array(SIZE).fill(0);
 const PROFILE_URL = "api/profile";
@@ -30,21 +32,31 @@ const ProfileComponent = () => {
   const [editLocation, setEditLocation] = useState(false);
   const [editMobileNum, setEditMobileNum] = useState(false);
   const [editHomeNum, setEditHomeNum] = useState(false);
+  const [editAboutMe, setEditAboutMe] = useState(false);
+  const [aboutMe, setAboutMe] = useState(user?.aboutMe);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
-    axios
+    axiosPrivate
       .get(
         PROFILE_URL,
-        { params: { email: "tummalapalli.n@northeastern.edu" } },
+        { params: { email: auth.email } },
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
       .then((response) => {
+        setAboutMe(response?.data?.data?.aboutMe);
         setUser(response?.data?.data);
       })
       .catch((err) => {
         console.log(err);
+        navigate("/authenticate/login", {
+          state: { from: location },
+          replace: true,
+        });
       });
   }, []);
 
@@ -57,13 +69,13 @@ const ProfileComponent = () => {
       return;
     }
     console.log(field + " " + value);
-    axios
+    axiosPrivate
       .post(
         PROFILE_UPDATE_URL,
         JSON.stringify({
           field,
           value,
-          email: "tummalapalli.n@northeastern.edu",
+          email: auth.email,
         }),
         {
           headers: { "Content-Type": "application/json" },
@@ -75,6 +87,13 @@ const ProfileComponent = () => {
         setEditBirthDate(false);
         setEditLocation(false);
         setEditMobileNum(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/authenticate/login", {
+          state: { from: location },
+          replace: true,
+        });
       });
   };
   const sectionRefs = [useRef(), useRef(), useRef(), useRef(), useRef()];
@@ -98,9 +117,11 @@ const ProfileComponent = () => {
     <div
       style={{
         paddingTop: "1rem",
+        backgroundColor: "lightgray",
       }}
+      className="container-fluid"
     >
-      <div id="#avathar" className="container">
+      <div id="#avathar" className="container row">
         <div className="col-lg-10 offset-lg-2">
           <span className="fw-normal h1" style={{ color: "#0078d4" }}>
             {user.firstName} {">"}
@@ -121,7 +142,7 @@ const ProfileComponent = () => {
                 data-cy="nav-wrapper"
                 style={{
                   listStyle: "none",
-                  backgroundColor: "white",
+                  backgroundColor: "lightgray",
                   textAlign: "right",
                   paddingTop: "4rem",
                 }}
@@ -156,7 +177,7 @@ const ProfileComponent = () => {
 
             <div
               data-cy="section-wrapper"
-              className="scrollspy-section-wrapper col-lg-8 col-md-12 ps-lg-5"
+              className="scrollspy-section-wrapper col-lg-8 col-md-12 ps-lg-5 pr-2"
             >
               <div
                 id="section-0"
@@ -167,13 +188,13 @@ const ProfileComponent = () => {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  backgroundColor: "white",
+                  backgroundColor: "lightgray",
                   paddingTop: "4rem",
                 }}
               >
                 <div
                   aria-label="contact information"
-                  className="d-flex align-middle"
+                  className="d-flex align-middle px-5"
                 >
                   <span>
                     <FontAwesomeIcon
@@ -192,7 +213,7 @@ const ProfileComponent = () => {
                     Contact Information
                   </span>
                 </div>
-                <div className="col-6">
+                <div className="col-md-6 px-5">
                   <h5 className="disabled my-4">Personal Information</h5>
                   <p>
                     {user.firstName} {"  "} {user.lastName}
@@ -267,11 +288,12 @@ const ProfileComponent = () => {
                   </div>
                   <br />
                 </div>
-                <div className="col-6">
+                <div className="col-md-6 px-5">
                   <h5 className="disabled my-4">Contact me</h5>
-                  
+
                   <div className="d-flex justify-content-between mb-3">
-                    <FontAwesomeIcon  size="lg"
+                    <FontAwesomeIcon
+                      size="lg"
                       icon={faEnvelope}
                     ></FontAwesomeIcon>
                     <a href={`mailto:${user.email}`} className="ms-2">
@@ -290,7 +312,7 @@ const ProfileComponent = () => {
                       <FontAwesomeIcon icon={faPencil} size="lg" />
                     </div>
                   </div>
-                  
+
                   <div className="d-flex justify-content-between mb-3">
                     <div>
                       <FontAwesomeIcon icon={faMobile} size="lg" />
@@ -370,24 +392,22 @@ const ProfileComponent = () => {
                   <br />
                 </div>
               </div>
-              <div className="p-3 border-bottom"></div>
+              <div className="border-bottom border-white border-1"></div>
               <div
                 id="section-1"
                 ref={sectionRefs[1]}
                 className={
-                  currentElementIndexInViewport === 1
-                    ? "row pt-2 active"
-                    : "row pt-2"
+                  currentElementIndexInViewport === 1 ? "row  active" : "row "
                 }
                 style={{
                   display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "white",
-                  fontSize: "2rem",
+
+                  backgroundColor: "lightgray",
+                  paddingTop: "4rem",
                 }}
               >
-                 <span>
+                <div aria-label="contact information" className="d-flex  px-5">
+                  <span>
                     <FontAwesomeIcon
                       icon={faQuoteLeft}
                       style={{
@@ -401,37 +421,108 @@ const ProfileComponent = () => {
                   </span>
                   <span className="fw-normal h3 align-middle ms-3 my-1">
                     {" "}
-                    Contact Information
+                    About me
                   </span>
-                <div className="col-12  ">
-                  <h2>h1. Bootstrap heading</h2>
+                  <br></br>
+                </div>
+                <p className="d-flex align-middle px-5">
+                  This is me in a few words
+                </p>
+                <div className="col-lg-6 col-11 mx-5">
+                  <textarea
+                    className="form-control"
+                    id="floatingTextarea2"
+                    style={{ height: "100px" }}
+                    placeholder="Tell your story to help others get to know you"
+                    disabled={!editAboutMe}
+                    value={aboutMe}
+                    onChange={(e) => setAboutMe(e.target.value)}
+                  ></textarea>
+                  <div className="mt-3">
+                    {!editAboutMe ? (
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => {
+                          setEditAboutMe(true);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          className="btn btn-primary rounded-pill mx-2"
+                          onClick={() => {
+                            updateProfile("aboutMe", aboutMe);
+                            setEditAboutMe(false);
+                          }}
+                        >
+                          Save
+                        </button>
+                        <button
+                          className="btn btn-primary rounded-pill mx-2"
+                          onClick={() => {
+                            setAboutMe(user?.aboutMe);
+                            setEditAboutMe(false);
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
+              <div className="border-bottom border-white border-1"></div>
               <div
                 id="section-2"
                 ref={sectionRefs[2]}
                 className={
-                  currentElementIndexInViewport === 2
-                    ? "row pt-2 active"
-                    : "row pt-2"
+                  currentElementIndexInViewport === 2 ? "row  active" : "row "
                 }
                 style={{
                   display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "500px",
-                  backgroundColor: "white",
 
-                  fontSize: "2rem",
+                  backgroundColor: "lightgray",
+                  paddingTop: "4rem",
                 }}
               >
-                <div className="col-6">
-                  <h2>h1. Bootstrap heading</h2>
+                <div aria-label="contact information" className="d-flex  px-5">
+                  <span>
+                    <FontAwesomeIcon
+                      icon={faDiagramProject}
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        textAlign: "center",
+                        display: "inline-block",
+                      }}
+                    ></FontAwesomeIcon>
+                  </span>
+                  <span className="fw-normal h3 align-middle ms-3 my-1">
+                    {" "}
+                    Projects
+                  </span>
+                  <br></br>
                 </div>
-                <div className="col-6">
-                  <h2>h1. Bootstrap heading</h2>
+                <p className="d-flex align-middle px-5">
+                  Here are some of the projects I've worked on
+                </p>
+                <div className="col-lg-8  mx-5">
+                  <input
+                    type="text"
+                    className="flex-fill form-control inline-block"
+                    
+                    placeholder="Enter your projects"
+                    onBlur={(e) => {
+                      updateProfile("homeNumber", e.target.value);
+                    }}
+                  ></input>
+                  <button className="btn btn-primary inline-block ms-2">+Add</button>
                 </div>
               </div>
+
               <div
                 id="section-3"
                 ref={sectionRefs[3]}
