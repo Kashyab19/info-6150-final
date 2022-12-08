@@ -16,28 +16,28 @@ const Navbar = () => {
 				<Bars />
 
 				<NavMenu>
-					<NavLink to='/about' activestyle>
+					<NavLink to='/about'>
 						About Us
 					</NavLink>
-					<NavLink to='/checkups' activestyle>
+					<NavLink to='/checkups'>
 						General Info		</NavLink>
-					<NavLink to='/book' activestyle>
+					<NavLink to='/book'>
 						Appointment Booking
 					</NavLink>
-					<NavLink to='/faq' activestyle>
+					<NavLink to='/faq'>
 						FAQ
 
 					</NavLink>
-					<NavLink to='/contactUs' activestyle>
+					<NavLink to='/contactUs'>
 						Contact
 					</NavLink>
-					<NavLink to='/details' activestyle>
+					<NavLink to='/details'>
 						Policy Details
 					</NavLink>
 				</NavMenu>
-				<NavBtn>
+				{/* <NavBtn>
 					<NavBtnLink to='/feedBack1' className="navLinkSub">Premium Subscription</NavBtnLink>
-				</NavBtn>
+				</NavBtn> */}
 			</Nav>
 		</>
 	);

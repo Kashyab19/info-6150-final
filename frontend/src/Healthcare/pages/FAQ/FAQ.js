@@ -8,7 +8,7 @@ function FAQ() {
 
 
   return (
-<div className='mainDiv myBgFC'>
+<div className='mainDiv myBgFC myDivFaq'>
 <Feedback></Feedback>
 <Banner>
       <Banner.Header>Frequently Asked Questions</Banner.Header>

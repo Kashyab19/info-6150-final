@@ -35,7 +35,7 @@ function Contact() {
 
 
   return (
-    <div className='mainDiv myBgFC'><br></br>
+    <div className='mainDiv myBgFC mainDivContact'><br></br>
       <Form>
         <Form.Group size="lg">
           <Form.Label className="fullName">Full Name</Form.Label><br></br>

@@ -1,55 +1,5 @@
-/*About*/
-.myImg {
-  width: 100%;
-}
-
-.myBgFC {
-  background-image: url('/Users/rushikeshdeore/Desktop/Fall22/INFO6150/FinalProject/info6150-project/frontend/src/Healthcare/pages/Images/diffBG.jpeg');
-
-}
-
-.myHome {
-
-  margin-left: 44%;
-  font-size: xx-large;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.myHomeSubtitle {
-  margin-left: 35%;
-  font-size: x-large;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.myHomeText {
-  /*   font-family: fantasy;
- */
-  font-size: large;
-}
-
-.myCardBody {
-  background-color: rgb(20, 133, 180);
-}
-
-/*About*/
 
 /* PolicyDetails */
-.containerPolicyDetails {
-  margin-top: 2%;
-  margin-left: 37%;
-  width: 25%;
-  border-style: dashed;
-  border-radius: 3rem;
-  height: 40px;
-  text-align: center;
-  /*   font-family: fantasy;
- */
-}
-
-.mainDivPolDet {
-  height: 640px;
-
-}
 
 /* Style to create scroll bar in dropdown */
 .scrollable-dropdown {
@@ -77,38 +27,114 @@
   cursor: grab;
 }
 
-.policyImage {
-  margin-left: 40%;
+@media screen and (min-width: 1440px) {
+  .mainDivPolDet {
+    height: 640px;
+  }
+
+  .policyImage {
+    margin-left: 40%
+  }
+
+  .mySection {
+    width: 315px;
+    height: 250px;
+    background-color: #2f5d6d;
+    border-style: dotted;
+    float: left;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .mySection1 {
+    width: 70%;
+    height: 250px;
+    padding: 15px;
+
+    background-color: #58a0b9;
+    border-style: dotted;
+    float: right;
+    text-align: center;
+  }
+
+  .welcomeNote {
+    margin-left: 8%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 0.5rem;
+    font-size: larger;
+    text-decoration: underline;
+    color: cadetblue;
+  }
+
+  .containerPolicyDetails {
+    margin-top: 2%;
+    margin-left: 37%;
+    width: 25%;
+    border-style: dashed;
+    border-radius: 3rem;
+    height: 40px;
+    text-align: center;
+    /*   font-family: fantasy;
+ */
+  }
+
 }
 
-.welcomeNote {
-  margin-left: 8%;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  margin-top: 0.5rem;
-  font-size: larger;
-  text-decoration: underline;
-  color: cadetblue;
+
+
+
+@media screen and (max-width: 768px) {
+  .policyImage {
+    margin-left: 34%
+  }
+
+  .mainDivPolDet {
+    height: 941px;
+
+  }
+
+  .welcomeNote {
+    /*     margin-left: 8%;
+ */
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-top: 0.5rem;
+    font-size: larger;
+    text-decoration: underline;
+    color: cadetblue;
+  }
+
+  .mySection {
+    /* width: 315px; */
+    /* height: 250px; */
+    background-color: #2f5d6d;
+    border-style: dotted;
+    /* float: left; */
+    padding: 15px;
+    text-align: center;
+  }
+
+  .mySection1 {
+    padding: 15px;
+    background-color: #58a0b9;
+    border-style: dotted;
+    text-align: center;
+  }
+
+  .containerPolicyDetails {
+    /* margin-top: 2%;
+    margin-left: 37%; */
+    width: 25%;
+    border-style: dashed;
+    border-radius: 3rem;
+    height: 40px;
+    text-align: center;
+    margin-left: 33%;
+
+    /*   font-family: fantasy;
+ */
+  }
 }
 
-.mySection {
-  width: 315px;
-  height: 250px;
-  background-color: #2f5d6d;
-  border-style: dotted;
-  float: left;
-  padding: 15px;
-  text-align: center;
-}
-
-.mySection1 {
-  width: 70%;
-  height: 250px;
-  background-color: #58a0b9;
-  border-style: dotted;
-  float: right;
-  padding: 15px;
-  text-align: center;
-}
 
 .borderLine {
   border: 1px solid #d6d6d6;
@@ -159,7 +185,7 @@
   width: 15%;
 }
 
-.policyDownButton:disabled{
+.policyDownButton:disabled {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
@@ -168,6 +194,14 @@
 /* PolicyDetails */
 
 /* ContactUs */
+
+@media screen and (max-width: 768px) {
+  .mainDivContact {
+    height: 950px;
+  }
+}
+
+@media screen and (min-width: 1440px) {}
 
 #button {
 
@@ -246,7 +280,7 @@ button:hover {
 .myHeader {
   margin-left: 10%;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  color: aliceblue;
+  color: white;
 
 }
 
@@ -255,7 +289,7 @@ button:hover {
   position: absolute;
   margin-top: -16px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  color: aliceblue;
+  color: white;
 }
 
 
@@ -277,16 +311,60 @@ button:hover {
  */
 }
 
-.mainDivCheckups {
-  height: 1150px;
+@media screen and (max-width: 768px) {
+  .mainDivCheckups {
+    height: 1273px;
+
+  }
+
+  .paraContent {
+    padding: 10px;
+    margin-left: 5%;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .information .buckets .info {
+    width: calc(33% -15px);
+    margin: 0 9px;
+    background: #E7F0F6;
+    /* padding: 30px; */
+  }
 }
 
-.wrap {
-  max-width: 1180px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
+@media screen and (min-width: 1440px) {
+  .mainDivCheckups {
+    height: 1150px;
+  }
+
+  .paraContent {
+    padding: 10px;
+    margin-left: 10%;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .information .buckets .info {
+    width: calc(33% -15px);
+    margin: 0 15px;
+    background: #E7F0F6;
+    padding: 30px;
+  }
 }
+
+
+
+
 
 .headingInfo {
   font: 500 65px/1 Tungsten;
@@ -306,12 +384,7 @@ button:hover {
   margin-left: 0;
 }
 
-.information .buckets .info {
-  width: calc(33% -15px);
-  margin: 0 15px;
-  background: #E7F0F6;
-  padding: 30px;
-}
+
 
 .information .buckets .info:last-child {
   margin-right: 0;
@@ -331,17 +404,13 @@ button:hover {
 .paraTwo {
   /*   font-family: fantasy;
  */
-  color: aliceblue;
+  color: white;
   font-size: large;
 }
 
 .paraHeading {
   text-align: center;
   text-decoration: underline;
-}
-
-.paraContent {
-  padding: 10px;
 }
 
 .information .info-message {
@@ -357,75 +426,8 @@ button:hover {
 /*Free Checkups*/
 
 /*BookAppointment*/
-.datePopulate {
-  text-align: center;
-  font-size: larger;
-  /*   font-family: fantasy;
- */
-  color: aliceblue;
-  text-decoration: underline;
-}
 
 
-.appointmentForm {
-  height: 450px;
-}
 
-.inputFields {
-  width: 96%;
-  height: 30px;
-}
-
-.email1,
-.phoneNum {
-  margin-left: 11%;
-  position: absolute;
-  /*   margin-top: -4px;
- */
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  color:aliceblue;
-}
-
-#fullName1,
-#email1,
-#phoneNum {
-  width: 25%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  margin-left: 10%;
-  /*   font-family: fantasy;
- */
-}
-
-#buttonAppointment {
-  background-color: #4f7490;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 15%;
-  margin-left: 15%;
-
-}
-
-buttonAppointment:hover {
-  opacity: 0.8;
-}
-
-
-.shownTime {
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-}
-
-.myTextColor {
-  color: aliceblue;
-  font-size: large;
-}
 
 /*BookAppointment*/
