@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Navbar from "./Navbar";
 
 import Main from "./Main";
 import Book from "./Book";
@@ -14,7 +13,6 @@ const LibraryBooking = () => {
     return(
     <>
     <div>
-      <Navbar setPage={setPage} />
       {page === 0 ? <Main setPage={setPage} /> : null}
       {page === 1 ? <Book setPage={setPage} /> : null}
       {page === 2 ? <ThankYou /> : null}

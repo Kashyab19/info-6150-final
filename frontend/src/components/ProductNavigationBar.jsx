@@ -39,7 +39,7 @@ const ProductNavigationBar = () => {
     
     return(
         <>
-         <div className="container">\
+         <div className="container">
 
             <Card className='w-75 justify-content-center align-items-center'>
                  <Card.Body>Hey👋,  {auth.user}&nbsp;Do you want to sell your products? &nbsp;

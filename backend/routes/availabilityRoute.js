@@ -3,13 +3,13 @@ var router = express.Router();
 var mongoose = require("mongoose");
 const RoomSchema = require('../models/Room').model;
 const Day = require("../models/Day").model;
-
+const  authenticateService = require("../services/AuthenticateService");
 // Parameters:
 // {
 //   "date": String ("Dec 02 2022 06:00")
 // }
 
-router.post("/", function(req, res, next) {
+router.post("/", authenticateService.authenticateToken,function(req, res, next) {
   console.log("request attempted");
 
   console.log(req.body);

@@ -6,7 +6,10 @@ const jwt = require("jsonwebtoken");
 const redis = require("redis");
 const sgMail = require("@sendgrid/mail");
 const mail = require("@sendgrid/mail");
-sgMail.setApiKey("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");
+const FeedbackSchema = require('../models/FeedbackSchema')
+sgMail.setApiKey(
+  "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"
+);
 
 const client = redis.createClient();
 client.connect();
@@ -55,10 +58,11 @@ exports.login = async (user) => {
         const accessToken = generateJWTToken(userExisting.email);
         const refreshToken = generateRefreshToken(userExisting.email);
         client.setEx(userExisting.email, DEFAULT_EXPIRATION, refreshToken);
+
         return {
           accessToken,
           refreshToken,
-          date: AddMinutesToDate(new Date(), 5),
+          date: AddMinutesToDate(new Date(), 1),
           firstName: userExisting.firstName,
         };
       } else if (result) {
@@ -90,17 +94,23 @@ exports.authenticateToken = async (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ");
   if (token == null || token.length != 2) {
-    res.json({ status: "FAILURE", message: "TOKEN_NOT_FOUND" });
-    return res.sendStatus(401);
+    // res.json({ status: "FAILURE", message: "NOT_AUTORIZED" });
+    // res.status(401);
+    // console.log("Erro")
+    // return;
+
+    return res
+      .status(403)
+      .json({ status: "FAILURE", message: "NOT_AUTORIZED" });
   }
   try {
     const res = await jwt.verify(token[1], process.env.ACCESS_TOKEN_SECRET);
     req.email = res;
-    return next();
+    next();
   } catch (err) {
     console.log(err);
-    res.status(401).json({ status: "FAILURE", message: "NOT_AUTORIZED" });
-    return res.send();
+    res.status(403).json({ status: "FAILURE", message: "NOT_AUTORIZED" });
+    res.send();
   }
 };
 
@@ -115,46 +125,46 @@ function AddMinutesToDate(date, minutes) {
 }
 
 exports.refreshToken = async (req, res) => {
-  const body = req.body;
-  if (body.refreshToken === undefined) {
+  const body = req.cookies;
+  if (!body?.jwt) {
+   
     res
-      .status(401)
+      .status(403)
       .json({ status: "FAILURE", message: "LOGIN_EXPIRED_PLEASE_LOGIN_AGAIN" });
-    return res.send();
+    return res;
   }
   try {
     const tokenRes = await jwt.verify(
-      body.refreshToken,
+      body.jwt,
       process.env.REFRESH_TOKEN_SECRET
     );
     const token = await client.get(tokenRes.email);
-    if (token === body.refreshToken) {
+    if (token === body.jwt) {
       const accessToken = generateJWTToken(tokenRes.email);
-      const refreshToken = generateRefreshToken(tokenRes.email);
-      client.setEx(tokenRes.email, DEFAULT_EXPIRATION, refreshToken);
-      res
-        .status(200)
-        .json({
-          accessToken,
-          refreshToken,
-          date: AddMinutesToDate(new Date(), 5),
-        });
+      let userExisting = await UserDataSchema.where("email")
+      .equals(tokenRes.email)
+      .findOne();
+      res.status(200).json({
+        accessToken,
+        email: tokenRes.email,
+        firstName : userExisting.firstName,
+        date: AddMinutesToDate(new Date(), 5),
+      });
       return res.send();
     } else {
-      res
-        .status(401)
-        .json({
-          status: "FAILURE",
-          message: "LOGIN_EXPIRED_PLEASE_LOGIN_AGAIN",
-        });
-      return res.send();
+
+      res.status(403).json({
+        status: "FAILURE",
+        message: "LOGIN_EXPIRED_PLEASE_LOGIN_AGAIN",
+      });
+      return res;
     }
   } catch (err) {
     console.log(err);
     res
-      .status(401)
+      .status(403)
       .json({ status: "FAILURE", message: "LOGIN_EXPIRED_PLEASE_LOGIN_AGAIN" });
-    return res.send();
+    return res;
   }
 };
 
@@ -216,12 +226,10 @@ exports.verifyCode = async ({ email, codeS }, res) => {
       const code = await client.get(email + "v");
       if (code === null || code === undefined) {
         this.sendVerificationEmail(email, userExisting.firstName);
-        res
-          .status(200)
-          .json({
-            status: "FAILURE",
-            message: "VERIFICATION_CODE_EXPIRED_SENDING_NEW_ONE",
-          });
+        res.status(200).json({
+          status: "FAILURE",
+          message: "VERIFICATION_CODE_EXPIRED_SENDING_NEW_ONE",
+        });
         return res.send();
       } else if (code == codeS) {
         const accessToken = generateJWTToken(userExisting.email);
@@ -231,24 +239,20 @@ exports.verifyCode = async ({ email, codeS }, res) => {
           { email },
           { $set: { isEnabled: true } }
         );
-        res
-          .status(200)
-          .json({
-            status: "SUCCESS",
-            data: {
-              accessToken,
-              refreshToken,
-              date: AddMinutesToDate(new Date(), 5),
-            },
-          });
+        res.status(200).json({
+          status: "SUCCESS",
+          data: {
+            accessToken,
+            refreshToken,
+            date: AddMinutesToDate(new Date(), 5),
+          },
+        });
         return res.send();
       } else {
-        res
-          .status(200)
-          .json({
-            status: "FAILURE",
-            message: "INVALID_ACCESS_TOKEN_TRY_AGAIN",
-          });
+        res.status(200).json({
+          status: "FAILURE",
+          message: "INVALID_ACCESS_TOKEN_TRY_AGAIN",
+        });
         return res.send();
       }
     }
@@ -290,12 +294,10 @@ exports.passwordReset = async ({ email, code, newPassword }, res) => {
     const codeS = await client.get(email + "v");
     if (codeS === null || codeS === undefined) {
       await this.sendPasswordResetEmail(email);
-      res
-        .status(200)
-        .json({
-          status: "FAILURE",
-          message: "VERIFICATION_CODE_EXPIRED_SENDING_NEW_ONE",
-        });
+      res.status(200).json({
+        status: "FAILURE",
+        message: "VERIFICATION_CODE_EXPIRED_SENDING_NEW_ONE",
+      });
       return res.send();
     } else if (code == codeS) {
       client.del(email + "v");
@@ -305,20 +307,16 @@ exports.passwordReset = async ({ email, code, newPassword }, res) => {
         { email },
         { $set: { password: hashPass } }
       );
-      res
-        .status(200)
-        .json({
-          status: "SUCCESS",
-          message: "PASSWORD_RESET_SUCCESSFUL_LOGIN_TO_CONTINUE",
-        });
+      res.status(200).json({
+        status: "SUCCESS",
+        message: "PASSWORD_RESET_SUCCESSFUL_LOGIN_TO_CONTINUE",
+      });
       return res.send();
     } else {
-      res
-        .status(200)
-        .json({
-          status: "FAILURE",
-          message: "INVALID_CODE_CHECK_PLEASE_CHECK_DETAILS",
-        });
+      res.status(200).json({
+        status: "FAILURE",
+        message: "INVALID_CODE_CHECK_PLEASE_CHECK_DETAILS",
+      });
       return res.send();
     }
   } catch (err) {
@@ -333,13 +331,11 @@ exports.passwordReset = async ({ email, code, newPassword }, res) => {
 exports.getProfile = async (email, res) => {
   const user = await UserDataSchema.where("email").equals(email).findOne();
   if (user) {
-    res
-      .status(200)
-      .json({
-        status: "SUCCESS",
-        message: "DATA_RETRIVES_SUCCESSFULLY",
-        data: user,
-      });
+    res.status(200).json({
+      status: "SUCCESS",
+      message: "DATA_RETRIVES_SUCCESSFULLY",
+      data: user,
+    });
     return;
   } else {
     res
@@ -358,10 +354,43 @@ exports.updateProfile = async (req, res) => {
       { new: false }
     );
     user[field] = req.body.value;
-    res.status(200).json({status: "SUCCESS", message: "DATA_RETRIVES_SUCCESSFULLY", data : user});
+    res
+      .status(200)
+      .json({
+        status: "SUCCESS",
+        message: "DATA_RETRIVES_SUCCESSFULLY",
+        data: user,
+      });
     return;
   } catch (err) {
-    res.status(200).json({status: "FAILURE", message: "INVALID_EMAIL_USER_NOT_FOUND"});
+    res
+      .status(200)
+      .json({ status: "FAILURE", message: "INVALID_EMAIL_USER_NOT_FOUND" });
     return;
   }
+};
+
+
+exports.deleteToken = async (req, res) => {
+  const cookies =req.cookies;
+  
+  await client.del(req.query.email)
+  if(cookies?.jwt){
+    res.clearCookie('jwt',{httpOnly : true, sameSite : 'None' , secure : true});
+  }
+  return res.status(200)
+};
+
+
+exports.saveFeeedback = async (req, res) => {
+  console.log(req.body);
+  const feedback = new FeedbackSchema({...req.body});
+  try{
+    await feedback.save()
+    return res.status(200)
+  }catch(err){
+    console.log(err);
+    return res.status(403)
+  }
+  return res.status(200);
 };
