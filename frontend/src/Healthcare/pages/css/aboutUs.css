@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .myBg{
-    background-image: url('/Users/rushikeshdeore/Desktop/Fall22/INFO6150/FinalProject/info6150-project/frontend/src/Healthcare/pages/Images/bgImage.jpeg');
+    background-image: url('../Images/bgImage.jpeg');
 }
 .mt-10{
 margin-top: 0.5rem;

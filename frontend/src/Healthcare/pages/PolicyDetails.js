@@ -6,7 +6,8 @@ import Popup from './Popup';
 import "./css/StylesCommon.css";
 import img from './Images/neu.png';
 import { Button } from 'react-bootstrap';
-
+import "./css/aboutUs.css";
+ 
 
 function PolicyDetails() {
   const [searchInput, setSearchInput] = useState("");
