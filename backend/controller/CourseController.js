@@ -4,11 +4,40 @@ exports.addCourse = async (req, res) => {
     console.log("add course")
     try {
         const product = await courseService.addCourse(req.body);
-        res.json({ data: product, status: "New course added successfully" });
+        res.json({ product });
       } catch (err) {
         res.status(500).json({ error: err.message });
       }
   }
+
+exports.editUser = async (req, res) => {
+  try {
+    // const hashVal = await new Promise((resolve, reject) =>{ 
+    //   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    //     if(err)
+    //     reject(err)
+    //   resolve(hash);
+    //   });
+    // });
+    // req.body.password = hashVal;
+    const userDet = await courseService.editUser(req.body.courseID, req.body);
+    if(userDet == null)
+    {
+      throw new Error ("User does not exist" );
+    }
+    // if(!(nameVal.test(req.body.name) || (req.body.name==null)))
+    // {
+    //   throw new Error("Enter a valid Name");
+    // }
+    // if(!(passVal.test(req.body.password) || (req.body.password)==null))
+    // {
+    //   throw new Error("Password must have atleast one capital letter, a number and a special character and should have a minimum of 8 characters");
+    // }
+    res.json({ status: "User details of " + req.body.email + " updated successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 exports.createUser = async (req, res) => {
 try {
@@ -57,3 +86,12 @@ exports.getAllCourses = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   };
+
+exports.saveSelectedCourses = async (req, res) => {
+  try {
+    const courses = await courseService.saveSelectedCourses(req.body);
+    res.json({data: courses, status: "Courses Saved"});
+  } catch {
+    res.status(500).json({error: err.message})
+  }
+}
