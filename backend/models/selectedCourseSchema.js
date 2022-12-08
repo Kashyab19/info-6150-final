@@ -8,7 +8,8 @@ const selectedCourseSchema = new Schema({
     Location: String,
     MeetingTime: String,
     Professor: String,
-    Program: String
+    Program: String,
+    Email: String,
 });
 
 const model = mongoose.model("SelectedCourses", selectedCourseSchema);

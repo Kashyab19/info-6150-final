@@ -44,6 +44,7 @@ const ViewCourses = () =>{
                     {console.log(courses)}
                     <div>
                         {courses.map((course) => {
+                            if (course.Email === 'gururaj.b@northeastern.edu') {
                             return (
                                 <div>
                                     <div className='course-selected'>
@@ -74,6 +75,7 @@ const ViewCourses = () =>{
                                         </div>
                                 </div>
                             )
+                                        }
                         }
                         
                         )}
