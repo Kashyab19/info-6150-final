@@ -1,9 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col } from "reactstrap";
 
 
+
 export default _ => {
+const [data, setData] = useState(null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+
+useEffect(() => {
+  fetch('http://localhost:3001/bookings')
+   .then((response) => console.log(response));
+ }, [data]);
   return (
+    
     <div className="library-main-container vh-100">
       <Row noGutters className="text-center align-items-center">
         <Col>
