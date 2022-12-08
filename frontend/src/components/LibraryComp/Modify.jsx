@@ -48,7 +48,7 @@ useEffect(() => {
                   <h5 class="card-title">{e.location}</h5>
                   <p>Capacity : {e.capacity}</p>
                   <p>Booking Date : {e.bookingtime.split("T")[0]}</p>
-                  <p>Booking Time : {e.bookingtime.split("T")[1]}</p>
+                  <p>Booking Time(UTC) : {e.bookingtime.split("T")[1].split(".")[0]}</p>
                   </div>
                 </div>
               )
