@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import {
   useJsApiLoader,
@@ -29,20 +29,59 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 
+import RedEyeCard from '../components/RedEyeCard'
 import { FaLocationArrow, FaTimes } from 'react-icons/fa'
-
-{/* <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script> */ }
+import AuthenticationContext from '../context/AuthenticationContext'
+import axios from '../api/axios'
+{/* <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" async defer></script>   */ }
 
 const center = { lat: 42.338729, lng: -71.088404 }
 
+
 function RedEye() {
   const [isOpen, setIsOpen] = React.useState('');
-  const onClose = () => setIsOpen('');
+  const [destination, setDestination] = useState('');
+  const [bookingTime, setTime] = useState('');
+  const [email, setEmail] = useState('');
+  const [existance, setExistance] = useState('');
+  const onClose = () => {
+
+    setIsOpen('');
+    //window.location.reload(false);
+    //setExistance(true);
+}
+  const google = window.google;
+
+  //export default {destination,bookingTime,email};
+
+  axios.post("/RedEye/getAllTrips", JSON.stringify({
+    email: "ijk123@gmail.com",
+  }),
+    {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    }).then(res => {
+      if (res.data.data[0] != null) {
+        //console.log(res.data.data[0].destination);
+        const destination = res.data.data[0].destination;
+        const bookingTime = res.data.data[0].bookingtime;
+        const email = res.data.data[0].email;
+        setDestination(destination);
+        setTime(bookingTime)
+        setEmail(email)
+        console.log("destttt" + destination);
+        console.log("Timeee" + bookingTime);
+        setExistance(true);
+        //console.log(res.data.data[0]);
+      } else { setExistance(false) }
+    });
 
 
+  const { auth } = useContext(AuthenticationContext);
   const { isLoaded } = useJsApiLoader({
     //googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     googleMapsApiKey: 'AIzaSyDoKTybKvgp09eBiRCPBB7Ar5eFq22uGps',
+    //googleMapsApiKey: 'AIzaSyDoKTybKvgp09eBiRCPBB7Ar5eFq22uGp',
     libraries: ['places'],
   })
 
@@ -50,6 +89,10 @@ function RedEye() {
   const [directionsResponse, setDirectionsResponse] = useState(null)
   const [distance, setDistance] = useState('')
   const [duration, setDuration] = useState('')
+  const { closed } = useContext(AuthenticationContext);
+  useEffect(() => {
+    // console.log( existance);
+  })
 
   /** @type React.MutableRefObject<HTMLInputElement> */
   const originRef = useRef()
@@ -83,11 +126,14 @@ function RedEye() {
     setDirectionsResponse(null)
     setDistance('')
     setDuration('')
-    originRef.current.value = ''
+    //originRef.current.value = ''
     destiantionRef.current.value = ''
   }
 
   async function checkRange() {
+    //console.log( destiantionRef.current.value)
+    console.log("Date: " + ((new Date()).toLocaleDateString))
+
     if (distance == '') {
       return
     }
@@ -99,8 +145,28 @@ function RedEye() {
       setIsOpen(true);
     } else {
       setIsOpen(false);
+      addTrip();
     }
   }
+
+
+  async function addTrip() {
+    console.log("About to add trip")
+    axios.post("/RedEye/addTrip", JSON.stringify({
+      email: "ijk123@gmail.com",
+      destination: destiantionRef.current.value,
+      bookingtime: new Date(),
+      
+
+    }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+      setExistance(true);
+  }
+
+
 
   return (
     <ChakraProvider theme={theme}>
@@ -121,6 +187,10 @@ function RedEye() {
               zoomControl: true,
               streetViewControl: false,
               mapTypeControl: true,
+              mapTypeControlOptions: {
+                // style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+                position: google.maps.ControlPosition.TOP_RIGHT,
+              },
               fullscreenControl: false,
             }}
             onLoad={map => setMap(map)}
@@ -145,6 +215,7 @@ function RedEye() {
           minW='container.md'
           zIndex='1'
         >
+          {/* {destination}, {bookingTime} */}
           <HStack spacing={2} justifyContent='space-between'>
             <Box flexGrow={1}>
               <Autocomplete>
@@ -157,6 +228,7 @@ function RedEye() {
                   type='text'
                   placeholder='Destination'
                   ref={destiantionRef}
+
                 />
               </Autocomplete>
             </Box>
@@ -175,7 +247,7 @@ function RedEye() {
           <HStack spacing={4} mt={4} justifyContent='space-between'>
             <Text>Distance: {distance} </Text>
             <Text>Duration: {duration} </Text>
-            <IconButton
+            {/* <IconButton
               aria-label='center back'
               icon={<FaLocationArrow />}
               isRound
@@ -183,12 +255,20 @@ function RedEye() {
                 map.panTo(center)
                 map.setZoom(15)
               }}
-            />
+            /> */}
+            <Button colorScheme='red' type='submit' justifyContent={center} onClick={checkRange} disabled={closed != false && existance!=false}>
+              Book RedEye
+            </Button>
           </HStack>
         </Box>
-        <Button colorScheme='red' type='submit' justifyContent={center} onClick={checkRange}>
-          Book RedEye
-        </Button>
+
+
+        <RedEyeCard
+          existance={existance}
+          Email={email}
+          Destination={destination}
+          BookingTime={bookingTime}
+        />
 
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
