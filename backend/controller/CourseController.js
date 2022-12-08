@@ -87,11 +87,38 @@ exports.getAllCourses = async (req, res) => {
     }
   };
 
-exports.saveSelectedCourses = async (req, res) => {
+exports.selectedCourses = async (req, res) => {
   try {
-    const courses = await courseService.saveSelectedCourses(req.body);
+    const courses = await courseService.selectedCourses(req.body);
     res.json({data: courses, status: "Courses Saved"});
   } catch {
     res.status(500).json({error: err.message})
   }
-}
+};
+
+exports.getSelectedCourses = async (req, res) => {
+  try {
+    const courses = await courseService.getSelectedCourses();
+    res.json({data: courses, status: "Get All API"});
+  } catch {
+    res.status(500).json({error: err.message})
+  }
+};
+
+exports.deleteAllSavedCourses = async (req, res) => {
+  try {
+    await courseService.deleteAllSavedCourses();
+    res.json({status: "Courses Deleted"})
+  } catch {
+    res.status(500).json({error: err.message})
+  }
+};
+
+exports.deleteAcourse = async (req, res) => {
+  try {
+    const userDet = await courseService.deleteAcourse(req.body.CourseID);
+    res.json({ data: userDet, status: "User " + userDet.CourseID + " deleted Successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
