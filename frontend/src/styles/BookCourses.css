@@ -1,3 +1,50 @@
+body {
+    background: url("../background.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+ul {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+  }
+  li {
+    display: flex;
+    margin: 1px;
+    padding: 5px;
+    color:black; 
+    text-decoration: none;
+    text-align: center;
+  }
+  li:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+.viewSelected {
+    color:black;
+    text-decoration: none;
+}
+
+.add-product-container {
+    background-color: whitesmoke;
+    /* width: 8em; */
+    
+}
+.form-head {
+    
+    text-align: center;
+}
+
 .form-check .form-comp {
     margin-right: 100px !important
 }
@@ -22,3 +69,7 @@ details > summary {
 details summary::-webkit-details-marker {
     display:none;
   }
+
+.submitButton {
+    background-color: rgb(231, 37, 37);
+}

@@ -6,8 +6,7 @@ import {Row, Col} from 'react-bootstrap';
 import "../styles/BookCourses.css"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import FileBase64 from 'react-file-base64';
-import GetAllCourses from './courseList';
+import { Link } from "react-router-dom";
 
 var isSelected = 'false';
 var prodCheck = 'false';
@@ -16,6 +15,7 @@ const terms = ['Spring 2023', 'Fall 2024'];
 const programEnrolled = [{ code:"MIS", "name":'Information Systems'} ,{ code: "SES", "name": 'Software Engineering Systems'}, { code: "MEM", "name":'Engineering Management'}];
 
 const programDet = []
+const selectedCourses = []
 // const programs = {
 //     "MIS": [
 //         {
@@ -144,6 +144,7 @@ const BookCourses = () =>{
     }
     const handleCheckBoxChange = (e) => {
         let newState = {...checked};
+        console.log(newState)
 
         if(newState[e]){
             newState[e] = !newState[e]
@@ -151,15 +152,23 @@ const BookCourses = () =>{
             newState[e] = true
         }
         setChecked(newState);
+        // console.log(checked)
+        // setNewProduct(
+        //     {
+        //         ...newProduct,
+        //         details: {
+        //             ...newProduct.details,
+        //             [e.target.name] : e.target.value
+        //         },
+                
+        //         [e.target.name] : e.target.value, //For root-level elements
+        //     }
+        // );
         setNewProduct(
             {
-                ...newProduct,
-                details: {
-                    ...newProduct.details,
-                    [e.target] : e.target
-                },
+                // ...newProduct,
+                // [e.target.name] : e.target.value, //For root-level elements
                 
-                [e.target] : e.target, //For root-level elements
             }
         );
     }
@@ -173,34 +182,45 @@ const BookCourses = () =>{
     const [flags, setFlags] = useState({
         showModal : false
     })
-    const [selectedCourses, setSelectedCourses] = useState({});
+    //const [selectedCourses, setSelectedCourses] = useState({});
     const [newProduct, setNewProduct] = useState( {
+        program: "",
         courseID : "",
         courseName: "",
-        program: "",
-        details:{
-            term: "",
-            description: "",
-            professor: "",
-            meetingTime: "",
-            location: "",
-            credits: "",
-            contact: "",
-            seats: ""
-        }
+        term: "",
+        description: "",
+        professor: "",
+        meetingTime: "",
+        location: "",
+        credits: "",
+        contact: ""
     });
     
     const handleSubmit =(e) => {
-        let checkedCourses = Object.keys(checked).filter((key) => checked[key])
+        //let checkedCourses = Object.keys(checked).filter((key) => checked[key])
         
         e.preventDefault();
         setChecked({});
         
-        console.log("At Handle Submit")
+        console.log(checked)
+
+        const temp = Object.keys(checked);
+
+        for(let i=0;i<temp.length;i++)
+        {
+            for(let j=0;j<programDet.length;j++)
+                if(temp[i] === programDet[j].props.CourseID)
+                {
+                    selectedCourses.push(<option Program = {programDet[j].props.Program} CourseID = {programDet[j].props.CourseID} 
+                        CourseName = {programDet[j].props.CourseName} Professor = {programDet[j].props.Professor} 
+                        MeetingTime = {programDet[j].props.MeetingTime} Location = {programDet[j].props.Location} 
+                        Contact = {programDet[j].props.Contact} key = {programDet[j].props.Program}>{i}</option>)
+                }
+        }
 
         var productAdded = newProduct;
         alert("Your courses have been saved")
-        // axios.post("http://127.0.0.1:3001/api/products/book-course", productAdded)
+        // axios.post("http://127.0.0.1:3001/api/course/saved-courses", productAdded)
         //     .then(response =>{
         //         console.log(response);
         //     })
@@ -208,25 +228,21 @@ const BookCourses = () =>{
         //     setFlags({
         //         showModal: true
         //     })
-        // setNewProduct({
-        // courseID : "",
-        // courseName: "",
-        // program: "",
-        // details:{
-        //     term: "",
-        //     description: "",
-        //     professor: "",
-        //     meetingTime: "",
-        //     location: "",
-        //     credits: "",
-        //     contact: "",
-        //     seats: ""
-        // }
-        // })
-
-
+        setNewProduct({
+            program: "",
+            courseID : "",
+            courseName: "",
+            term: "",
+            description: "",
+            professor: "",
+            meetingTime: "",
+            location: "",
+            credits: "",
+            contact: "",
+        })
 
         console.log(newProduct)
+        console.log(selectedCourses)
     }
     const handleModal = (e) => {
         e.preventDefault();
@@ -238,11 +254,6 @@ const BookCourses = () =>{
         setNewProduct(
             {
                 ...newProduct,
-                details: {
-                    ...newProduct.details,
-                    [e.target.name] : e.target.value
-                },
-                
                 [e.target.name] : e.target.value, //For root-level elements
             }
         );
@@ -291,12 +302,12 @@ const BookCourses = () =>{
         setNewProduct(
             {
                 ...newProduct,
-                details: {
-                    ...newProduct.details,
-                    [e.target.name] : prog
-                },
+                // details: {
+                //     ...newProduct.details,
+                //     [e.target.name] : prog
+                // },
 
-                [e.target.name] : prog, //For root-level elements
+                [e.target.name] : e.target.value, //For root-level elements
                 
             },
             console.log(prog)
@@ -307,7 +318,16 @@ const BookCourses = () =>{
     return(
         <div className="add-product-container ">
             <Form onSubmit={handleSubmit} autoComplete="off" validate = "true" encType='multipart/form-data' >
-                <h4> Course List </h4>
+                <ul >
+                    <li className='.form-head'><h4 > Course List </h4></li>
+                    <li>
+                    <Link className='viewSelected' to= '/view-course' state = {{ from: selectedCourses}}>
+                        {console.log(selectedCourses)}
+                         View my Courses 
+                    </Link>
+                    </li>
+                    
+                </ul>
                 {/* <Form.Group className="mb-3" controlId="formBasicEmail" required>
                     <Form.Control type="text" placeholder="Product Name*" name="productName" value={newProduct.productName} onChange={handleChange}/>
                 </Form.Group>
@@ -333,7 +353,7 @@ const BookCourses = () =>{
                     </Col> */}
                     <Col>
                         <Form.Group as={Col} controlId="formGridState">
-                            <Form.Select name="term" value={newProduct.details.term}  onChange={handleChange}>
+                            <Form.Select name="term" value={newProduct.term}  onChange={handleChange}>
                                 <option>Select a Term*</option>
                                 {
                                     terms?.map(
@@ -357,7 +377,8 @@ const BookCourses = () =>{
                                 <Form.Select defaultValue="None" name="program" value={newProduct.program} onChange={handleProgramChange}>
                                     <option>Program Enrolled In*</option>
                                     {
-                                        programEnrolled.map((program) => {
+                                        programEnrolled?.map(
+                                            program => {
                                                 return(
                                                     <option key={program.code} value ={program.code}>
                                                         {program.name}
@@ -380,6 +401,7 @@ const BookCourses = () =>{
                                 return (
                                 <div className="form-check">
                                     <label className='form-comp'>
+                                        {console.log(checked[program.props.CourseID])}
                                     <div className='course-check-box'>
                                         <input
                                         type="checkbox"
@@ -452,17 +474,17 @@ const BookCourses = () =>{
                 </div>
 
                 <div className='d-flex justify-content-center'>
-                    <Button className='' variant="primary" type="submit"> Submit </Button>
+                    <Button className='submitButton' variant="danger" type="submit"> Submit </Button>
                 </div>   
         </Form>
 
-                            <Modal open={flags.showModal}>
-                                <Modal.Dialog>
-                                <Modal.Header closeButton>
-                                <Modal.Title>Modal title</Modal.Title>
-                                </Modal.Header>
-                                 </Modal.Dialog>
-                            </Modal>
+        <Modal open={flags.showModal}>
+            <Modal.Dialog>
+            <Modal.Header closeButton>
+            <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+                </Modal.Dialog>
+        </Modal>
        
     </div>
     )

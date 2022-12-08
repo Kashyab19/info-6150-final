@@ -86,3 +86,12 @@ exports.getAllCourses = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   };
+
+exports.saveSelectedCourses = async (req, res) => {
+  try {
+    const courses = await courseService.saveSelectedCourses(req.body);
+    res.json({data: courses, status: "Courses Saved"});
+  } catch {
+    res.status(500).json({error: err.message})
+  }
+}

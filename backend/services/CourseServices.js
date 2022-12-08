@@ -19,3 +19,8 @@ exports.getAllCourses = async() => {
   console.log("Inside get");
   return await CourseModelSchema.find();
 }
+
+exports.saveSelectedCourses = async(courseDet) => {
+  console.log("Data saved");
+  return await CourseModelSchema.create(courseDet);
+}
