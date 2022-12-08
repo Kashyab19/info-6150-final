@@ -71,3 +71,7 @@ exports.updateProfile = (req, res) => {
   return authenicateService.updateProfile(req, res);
 };
 
+exports.getProfile = (req,res)=> {
+  return authenicateService.getProfile(req.query.email, res);
+}
+
