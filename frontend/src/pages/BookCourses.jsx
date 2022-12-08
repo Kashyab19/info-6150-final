@@ -11,11 +11,13 @@ import { Link } from "react-router-dom";
 var isSelected = 'false';
 var prodCheck = 'false';
 var prog;
+var tempVal;
 const terms = ['Spring 2023', 'Fall 2024'];
 const programEnrolled = [{ code:"MIS", "name":'Information Systems'} ,{ code: "SES", "name": 'Software Engineering Systems'}, { code: "MEM", "name":'Engineering Management'}];
 
 const programDet = []
 const selectedCourses = []
+const bodyFormData = new FormData();
 // const programs = {
 //     "MIS": [
 //         {
@@ -136,12 +138,12 @@ const selectedCourses = []
 const BookCourses = () =>{
     
     const [courses, setCourses] = useState([])
-    const [showResults, setShowResults] = useState(false);
+    const [showResults, setShowResults] = useState([]);
     const [checked, setChecked] = useState({});
-    const showDetails = (e) => {
-        setShowResults(true);
-        console.log(e)
-    }
+    // const showDetails = (e) => {
+    //     setShowResults(true);
+    //     console.log(e)
+    // }
     const handleCheckBoxChange = (e) => {
         let newState = {...checked};
         console.log(newState)
@@ -215,19 +217,18 @@ const BookCourses = () =>{
                         CourseName = {programDet[j].props.CourseName} Professor = {programDet[j].props.Professor} 
                         MeetingTime = {programDet[j].props.MeetingTime} Location = {programDet[j].props.Location} 
                         Contact = {programDet[j].props.Contact} key = {programDet[j].props.Program}>{i}</option>)
+                    
+                    axios.post("http://localhost:3001/api/course/selected-courses", selectedCourses[i].props)
                 }
         }
 
+        selectedCourses.forEach((item) => {
+            bodyFormData.append('selectedCourses[]', item);
+        });
+
         var productAdded = newProduct;
         alert("Your courses have been saved")
-        // axios.post("http://127.0.0.1:3001/api/course/saved-courses", productAdded)
-        //     .then(response =>{
-        //         console.log(response);
-        //     })
-
-        //     setFlags({
-        //         showModal: true
-        //     })
+        
         setNewProduct({
             program: "",
             courseID : "",
@@ -250,14 +251,16 @@ const BookCourses = () =>{
     }
     const handleChange = (e) => {
         e.preventDefault();
+        tempVal = e.target.value;
         setSelected(e.value);
+        //setShowResults(e.target.value);
         setNewProduct(
             {
                 ...newProduct,
                 [e.target.name] : e.target.value, //For root-level elements
             }
         );
-        
+        console.log(tempVal)
     }
 
     useEffect(() => {
@@ -319,16 +322,17 @@ const BookCourses = () =>{
         <div className='' >
         <div className="add-product-container ">
             <Form onSubmit={handleSubmit} autoComplete="off" validate = "true" encType='multipart/form-data' >
-                <ul >
-                    <li className='.form-head'><h4 > Course List </h4></li>
-                    <li>
-                    <Link className='viewSelected' to= '/view-course' state = {{ from: selectedCourses}}>
-                        {console.log(selectedCourses)}
-                         View my Courses 
-                    </Link>
-                    </li>
-                    
-                </ul>
+                <div>
+                    <ul className='form-head'>
+                        <li><h4 > Course List </h4></li>
+                        <li>
+                        <Link className='viewSelected' to= '/view-course' >
+                            {console.log(selectedCourses)}
+                            View my Courses 
+                        </Link>
+                        </li>
+                    </ul>
+                </div>
                 {/* <Form.Group className="mb-3" controlId="formBasicEmail" required>
                     <Form.Control type="text" placeholder="Product Name*" name="productName" value={newProduct.productName} onChange={handleChange}/>
                 </Form.Group>
@@ -398,7 +402,8 @@ const BookCourses = () =>{
                         <Form.Group>
                              {
                               selected && programDet.map((program) => {
-                              if (selected === program.key) {
+                                console.log(program.key)
+                              if (selected === program.key ) {
                                 return (
                                 <div className="form-check">
                                     <label className='form-comp'>
