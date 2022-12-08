@@ -216,7 +216,7 @@ const BookCourses = () =>{
                     selectedCourses.push(<option Program = {programDet[j].props.Program} CourseID = {programDet[j].props.CourseID} 
                         CourseName = {programDet[j].props.CourseName} Professor = {programDet[j].props.Professor} 
                         MeetingTime = {programDet[j].props.MeetingTime} Location = {programDet[j].props.Location} 
-                        Contact = {programDet[j].props.Contact} key = {programDet[j].props.Program}>{i}</option>)
+                        Contact = {programDet[j].props.Contact} Email = {"murali.k@northeastern.edu"} key = {programDet[j].props.Program}>{i}</option>)
                     
                     axios.post("http://localhost:3001/api/course/selected-courses", selectedCourses[i].props)
                 }
@@ -270,7 +270,7 @@ const BookCourses = () =>{
             return res.data
     })}, []
     )
-    //{console.log(courses)}
+    {console.log(courses)}
 
     for (let i=0;i<courses.length;i++)
     {
@@ -278,7 +278,7 @@ const BookCourses = () =>{
         console.log(courses.length)
         if(programDet.length < courses.length)
             {   programDet.push(<option Program = {courses[i].program} CourseID = {courses[i].courseID} 
-                              CourseName = {courses[i].courseName} Description = {courses[i].description} 
+                              CourseName = {courses[i].courseName} term = {courses[i].term} Description = {courses[i].description} 
                               Professor = {courses[i].professor} MeetingTime = {courses[i].meetingTime} 
                               Location = {courses[i].location} Credits = {courses[i].credits} Contact = {courses[i].contact}
                               Seats = {courses[i].seats} key = {courses[i].program}>{i}</option>)
@@ -402,12 +402,13 @@ const BookCourses = () =>{
                         <Form.Group>
                              {
                               selected && programDet.map((program) => {
-                                console.log(program.key)
-                              if (selected === program.key ) {
+                                console.log(program)
+                              if (selected === program.key && tempVal === program.props.term) {
                                 return (
                                 <div className="form-check">
                                     <label className='form-comp'>
-                                        {console.log(checked[program.props.CourseID])}
+                                        {/* {console.log(checked[program.props.CourseID])} */}
+                                        {console.log(Object.keys(checked).length)}
                                     <div className='course-check-box'>
                                         <input
                                         type="checkbox"
