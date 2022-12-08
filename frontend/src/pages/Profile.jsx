@@ -37,7 +37,6 @@ const ProfilePage = () => {
   const navRef = useRef();
   const { auth } = useContext(AuthenticationContext);
   const [navbarActive, setNavBarActive] = useState(false);
-  const sectionRefs = [useRef(), useRef(), useRef(), useRef(), useRef()];
   const data = [
     "Contact information",
     "About me",
