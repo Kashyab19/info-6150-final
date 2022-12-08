@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var mongoose = require("mongoose");
-const RoomSchema = require('../models/Room');
+const RoomSchema = require('../models/Room').model;
 const Day = require("../models/Day").model;
 
 // Parameters:

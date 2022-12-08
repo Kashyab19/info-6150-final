@@ -1,0 +1,19 @@
+ body {
+   background-color: white;
+   margin: 0;
+/*    background-image: url('/Users/rushikeshdeore/Desktop/Fall22/INFO6150/FinalProject/info6150-project/frontend/src/pages/Images/bgImage.jpeg');
+ */   font-family: "Arial", "Helvetica Neue", "sans-serif";
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smothing: grayscale;
+   font-family: fantasy !important;
+ }
+
+ body a{
+  color:#00f7ff;
+  font-size: large;
+  text-decoration: underline;
+ }
+
+ .navLinkSub {
+   position: absolute;
+ }
